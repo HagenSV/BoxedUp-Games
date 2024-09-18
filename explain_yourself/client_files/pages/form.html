@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BoxedJack Games</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="cookie_manager.js"></script>
+    <script src="game_controller.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2>Explain Yourself!</h2>
+    </div>
+    <div id="contents">
+        <p class="center-text" id="prompt">Prompt</p>
+        <div class="center-text">
+            <form onsubmit="submitResponse(); return false;">
+                <textarea required id="response" name="response" placeholder="Explain how you got in this situation" style="width:60%; height:100px" oninput="onType()" onkeypress="onKeyPress(event)"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+        <script>
+
+            getPrompt()
+
+            function getPrompt(){
+                let request = new XMLHttpRequest();
+                request.open("POST","/prompt");
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200){
+                        document.getElementById("prompt").innerText = request.responseText;
+                    }
+                }
+                request.send();
+            }
+
+            function submitResponse() {
+                let input = document.getElementById("response");
+                if (input == null){ return; }
+                if (!validate()){ return; }
+                let params = "response="+input.value;
+                document.getElementById("response").value = "";
+                let request = new XMLHttpRequest();
+                request.open("POST","/submit");
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200){
+                        getPrompt();
+                    }
+                }
+                request.send(params);
+
+            }
+
+            function onKeyPress( e ){ 
+                if (e.key === "Enter"){
+                    submitResponse();
+                }
+            }
+
+            function onType() {
+                const MAX_LEN = 300;
+                const input = document.getElementById("response");
+                input.value = input.value.replaceAll("\n","")
+                len = input.value.length;
+                input.value = input.value.substring(0,Math.min(len,MAX_LEN));
+            }
+
+            function validate() {
+                const input = document.getElementById("response");
+                input.value = input.value.trim();
+                const name = input.value;
+                if (name.length === 0){
+                    alert("Please enter a valid response");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </div>
+<div class="footer"><h3 class="center-text">Player Name</h3></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login Page for Game">
+    <title>Explain yourself!</title>
+    <link rel="stylesheet" href="https://use.typekit.net/vfj8mow.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="cookie_manager.js"></script>
+    <script src="game_controller.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2 class="center-text">Explain Yourself!</h2>
+    </div>
+    <div id="contents">
+    <p>Waiting for game to start...</p>
+    <ul id="playerlist"></ul>
+    <script>
+    updatePlayers();
+    let updatePlayerInterval = setInterval(updatePlayers,500);
+
+    function updatePlayers(){
+        playerlist = document.getElementById("playerlist");
+
+        if (playerlist === null){
+            clearInterval(updatePlayerInterval);
+            return;
+        }
+        
+        let http = new XMLHttpRequest();
+        http.open('POST', "/players");
+
+        http.onreadystatechange = function() {
+            if( http.readyState == 4 && http.status == 200 ) {
+                playerlist.innerHTML = http.responseText.split(", ").map((value) => {return `<li>${value + ((value === getCookie("name")) ? " (You)" : "") }</li>` }).join("");
+            }
+        }
+
+        http.send();
+
+    }
+    </script>
+    </div>
+    <div class="footer">
+        <h3 id="name" class="center-text"></h3>
+    </div>
+</body>
+</html>

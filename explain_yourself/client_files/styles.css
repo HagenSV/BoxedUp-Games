@@ -1,0 +1,157 @@
+:root {
+    /*
+    saturation range: 50%-70%
+    */
+    --c-h: 180;
+    /* Color hue */
+    --c-s: 60%;
+    /* Color saturation */
+    --background-color: #d6f5f5;
+    /* l 90% */
+    --primary-color: #29a3a3;
+    /* l 40% */
+    --secondary-color: #99e6e6;
+    /* l 75% */
+}
+
+body {
+    font-family: "pain-de-mie", "Georgia";
+    font-size: 23px;
+    letter-spacing: 1px;
+    margin: 0px;
+    background-color: var(--background-color);
+    opacity: 1;
+    background-image:
+        radial-gradient(var(--primary-color) 4px, transparent 6px),
+        radial-gradient(var(--primary-color) 5px, transparent 7px),
+        radial-gradient(var(--primary-color) 5px, transparent 7px),
+        radial-gradient(var(--primary-color) 7px, transparent 9px),
+        radial-gradient(var(--primary-color) 6px, transparent 8px),
+        radial-gradient(var(--primary-color) 8px, transparent 10px),
+        radial-gradient(var(--primary-color) 4px, transparent 6px),
+        radial-gradient(var(--primary-color) 5px, transparent 7px);
+    background-size: 240px 240px;
+    background-position:
+        0 0,
+        0 120px,
+        120px 0,
+        120px 120px,
+        60px 60px,
+        60px 180px,
+        180px 60px,
+        180px 180px;
+    animation: animate-bg 10s linear 0s infinite;
+    /**/
+}
+
+p, li {
+    width: fit-content;
+    background: var(--background-color);
+}
+
+@keyframes animate-bg {
+    from {
+        background-position:
+            0 0,
+            0 120px,
+            120px 0,
+            120px 120px,
+            60px 60px,
+            60px 180px,
+            180px 60px,
+            180px 180px;
+    }
+
+    to {
+        background-position:
+            240px -240px,
+            240px -120px,
+            360px -240px,
+            360px -120px,
+            300px -180px,
+            300px -60px,
+            420px -180px,
+            420px -60px;
+    }
+}
+
+/*
+Width: 
+< 200px
+> 600px
+> 768px
+> 992px
+> 1200px
+
+
+*/
+
+#contents {
+    margin: 20px;
+}
+
+#response {
+    overflow-wrap: normal;
+    word-wrap: normal;
+    resize: none;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.card {
+    width: 40%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 3%;
+    background: var(--background-color)
+}
+
+.card.selected {
+    background-color: var(--secondary-color);
+}
+
+.header {
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 5px 0px
+}
+
+.header h2 {
+    letter-spacing: 2px;
+    font-size: 50px;
+    margin: 5px 0px
+}
+
+.header p {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    position: fixed;
+    font-weight: bolder;
+    background-color: var(--primary-color);
+}
+
+.footer h3 {
+    margin: 5px 0px;
+}
+
+@media screen and (max-width: 800px) {
+    .card {
+        width: 70%;
+    }
+}
+
+button {
+    border-width: 2px;
+    border-style: outset;
+    border-color: black;
+}
