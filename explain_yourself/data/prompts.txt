@@ -1,0 +1,40 @@
+#11 new prompts (goal 20)
+#GCC Specific
+Campo is knocking on your door
+You are locked in McNulty's basement
+
+#Regular
+You are forced to wear a hat for the rest of your life
+You are a sentient pile of spiders
+You are being chased by a bear being chased by a swarm of bees
+You are the monster under the bed
+Your teacher called you an "absolute goober"
+You are a knight in the crusades
+A goblin stole your right ear
+You are missing the tip of your finger
+You are being sucked into a black hole
+You are married to your step-sibling
+You are stuck on the moon with no way home
+The minions want you to be their evil master
+You are a fighter pilot and just got shot down by Snoopy on his flying dog house
+You won the lottery, but you didn't buy a lottery ticket
+You are a ghost
+You are inside a nuclear reactor
+It is 79 AD, you are in Pompeii and Mount Vesuvius is erupting
+You are being beheaded in the French Revolution
+You were ejected in a real life game of Among Us
+You are falling
+You are the last human on earth
+You are the pope
+You stole the original copy of the Declaration of Independence
+Your feet and hands have switched places
+You accidentally wanted a world war
+You woke up with an extra arm
+There is a horse in your kitchen
+
+#Dynamic
+You are inside {player}'s dream
+You are being sued by {player}
+You were written in as president of {country}
+You are in exile in {country}
+You are trapped in {place}
