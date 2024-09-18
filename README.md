@@ -1,0 +1,1 @@
+BoxedUp Games is a collection of party games like jackbox, but with one major difference: due to technical and financial limitations, the game can only be played by players on the same network.
