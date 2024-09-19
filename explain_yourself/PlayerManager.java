@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class PlayerManager {
 
-    private static final File PROMPT_FILE = new File("explain_yourself/data/prompts.txt");
-    private static final File COUNTRIES_FILE = new File("explain_yourself/data/countries.txt");
-    private static final File PLACES_FILE = new File("explain_yourself/data/places.txt");
+    private static final File PROMPT_FILE = new File("game_files/explain_yourself/data/prompts.txt");
+    private static final File COUNTRIES_FILE = new File("game_files/explain_yourself/data/countries.txt");
+    private static final File PLACES_FILE = new File("game_files/explain_yourself/data/places.txt");
 
     private static final int PROMPTS_PER_PLAYER = 2;
     private final int playerCount;
