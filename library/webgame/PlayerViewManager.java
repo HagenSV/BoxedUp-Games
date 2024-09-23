@@ -18,5 +18,5 @@ public abstract class PlayerViewManager {
         return playerManager;
     }
 
-    public abstract void sendScreen(int playerId, int gameState);
+    public abstract void sendScreen(int playerId);
 }

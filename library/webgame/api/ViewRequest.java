@@ -23,7 +23,7 @@ public class ViewRequest extends APIRequest {
             return;
         }
 
-        game.playerViewManager.sendScreen(0, game.gameStateManager.getPhase());
+        game.playerViewManager.sendScreen(playerId);
     }
     
 }
