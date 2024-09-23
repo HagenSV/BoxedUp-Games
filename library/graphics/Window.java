@@ -13,7 +13,7 @@ public class Window extends JFrame {
     JPanel currentScene;
 
     public Window(String title){
-        setTitle("BoxedJack Games");
+        setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setMinimumSize(new Dimension(900,600));
