@@ -32,7 +32,7 @@ public class PlayerManager {
      * @return the resolved name of the player or null if the player could not be added
      */
     public String addPlayer(String playerName){
-        if ( playerList.size() == MAX_PLAYERS ) {
+        if ( playerList.size() == MAX_PLAYERS || !game.gameStateManager.canJoin() ) {
             return null;
         }
 
