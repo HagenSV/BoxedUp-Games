@@ -48,6 +48,11 @@ public abstract class PlayerManager {
         return playerName;
     }
     
+
+    public int getPlayerCount(){
+        return playerList.size();
+    }
+
     /**
      * Gets player data
      * @return an object storing all players' data
