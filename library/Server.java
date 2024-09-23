@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -28,7 +30,6 @@ public class Server {
         server.createContext("/",h);
     
         ThreadPoolExecutor threadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-    
         server.setExecutor(threadPool);
         server.start();
     }
@@ -41,27 +42,24 @@ public class Server {
         server.stop(0);
     }
 
-    public static void generateQR(String options){
-        try {
-            String ipAddr = InetAddress.getLocalHost().getHostAddress();
+    public static void generateQR(String options) throws IOException, UnknownHostException, URISyntaxException {
+        String ipAddr = InetAddress.getLocalHost().getHostAddress();
 
-            URL serverUrl = new URI("https://quickchart.io/qr?text=http://"+ipAddr+"/&"+options).toURL();
-            HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
+        //InetAddress.getLoopbackAddress().getHostAddress();
 
-            // Get a readable channel from url connection
-            ReadableByteChannel httpResponseBody = Channels.newChannel(urlConnection.getInputStream());
+        URL serverUrl = new URI("https://quickchart.io/qr?text=http://"+ipAddr+"/&"+options).toURL();
+        HttpURLConnection urlConnection = (HttpURLConnection) serverUrl.openConnection();
 
-            // Create the file channel to save file
-            FileOutputStream destination = new FileOutputStream("qrcode.png");
-            FileChannel fileChannelForDownloadedFile = destination.getChannel();
+        // Get a readable channel from url connection
+        ReadableByteChannel httpResponseBody = Channels.newChannel(urlConnection.getInputStream());
 
-            // Save the contents of HTTP response to local file
-            fileChannelForDownloadedFile.transferFrom(httpResponseBody, 0, Long.MAX_VALUE);
+        // Create the file channel to save file
+        FileOutputStream destination = new FileOutputStream("qrcode.png");
+        FileChannel fileChannelForDownloadedFile = destination.getChannel();
 
-            destination.close();
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Failed to generate qr code");
-        }
+        // Save the contents of HTTP response to local file
+        fileChannelForDownloadedFile.transferFrom(httpResponseBody, 0, Long.MAX_VALUE);
+
+        destination.close();
     }
 }
