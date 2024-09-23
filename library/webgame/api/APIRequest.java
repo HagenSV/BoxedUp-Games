@@ -74,4 +74,17 @@ public abstract class APIRequest implements HttpHandler {
         Files.copy( f.toPath(), out );
         out.close();   
     }
+
+
+    public static void send400BadRequest(HttpExchange exchange) throws IOException {
+        sendResponse(exchange, 400, "BadRequest");
+    }
+
+    public static void send401AccessDenied(HttpExchange exchange) throws IOException {
+        sendResponse(exchange, 401, "Access Denied");
+    }
+
+    public static void send404NotFound( HttpExchange exchange) throws IOException {
+        sendResponse(exchange, 404, "Not Found");
+    }
 }
