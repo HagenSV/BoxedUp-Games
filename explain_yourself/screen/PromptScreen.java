@@ -54,10 +54,10 @@ public class PromptScreen extends BasicScreen {
         g.setFont(FONT.deriveFont(35f));
         g.drawString("Submissions:",20,300);
         g.setFont(FONT.deriveFont(20f));
-        List<String> players = game.getPlayers();
-        for (int i = 0; i < game.getPlayerCount(); i++){
+        List<String> players = game.playerManager.getPlayers();
+        for (int i = 0; i < game.playerManager.getPlayerCount(); i++){
             String pName = players.get(i);
-            int submissions = game.getPlayerManager().getResponseCount(i);
+            int submissions = game.gameData.getResponseCount(i);
             //Gray out the player's name if they submitted both responses
             g.setColor(submissions == 2 ? Color.GRAY : Color.BLACK);
             g.drawString(pName+"  "+submissions+"/2", 40,330+25*i);

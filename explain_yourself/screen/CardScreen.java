@@ -1,8 +1,8 @@
 package explain_yourself.screen;
 
-import static explain_yourself.GameConfigs.CARD_INTRO_PHASE;
-import static explain_yourself.GameConfigs.VOTE_PHASE;
-import static explain_yourself.GameConfigs.VOTE_RESULTS_PHASE;
+import static explain_yourself.ExplainGameConfigs.CARD_INTRO_PHASE;
+import static explain_yourself.ExplainGameConfigs.VOTE_PHASE;
+import static explain_yourself.ExplainGameConfigs.VOTE_RESULTS_PHASE;
 import static explain_yourself.screen.ScreenManager.*;
 
 import java.awt.Graphics;
@@ -10,9 +10,10 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import explain_yourself.PlayerManager;
+import explain_yourself.ExplainGameData;
 import explain_yourself.screen.ScreenManager.BasicScreen;
 import library.DynamicValue;
+import library.webgame.PlayerManager;
 
 public class CardScreen extends BasicScreen {
     
@@ -151,7 +152,7 @@ public class CardScreen extends BasicScreen {
         else if (introAnimationStep == 6){
             label1.setVisible(true);
             resetIntro();
-            game.setPhase(VOTE_PHASE);
+            game.gameStateManager.setPhase(VOTE_PHASE);
         }
         
     }
@@ -166,11 +167,11 @@ public class CardScreen extends BasicScreen {
     public void showResults(){
         if (animationTimer.isInterpolating()){ return; }
 
-        PlayerManager pm = game.getPlayerManager();
-        int promptId = game.getCardIndex();
+        ExplainGameData data = game.gameData;
+        int promptId = data.getCardIndex();
 
-        int votes1 = pm.getVotes(promptId,0);
-        int votes2 = pm.getVotes(promptId,1);
+        int votes1 = data.getVotes(promptId,0);
+        int votes2 = data.getVotes(promptId,1);
 
         if (resultsAnimationStep == -1){
             resultsAnimationStep++;
@@ -196,7 +197,7 @@ public class CardScreen extends BasicScreen {
         }
         else if (resultsAnimationStep == 1){
             resultsAnimationStep = -1;
-            game.setPhase(CARD_INTRO_PHASE);
+            game.gameStateManager.setPhase(CARD_INTRO_PHASE);
         }
     }
 
@@ -221,26 +222,26 @@ public class CardScreen extends BasicScreen {
         votes2Lbl.setLocation(card2.getX()+card2.getWidth()+20,card2.getY()+card2.getHeight()/2-votes2Lbl.getWidth()/2);
 
 
-        int cardIndex = game.getCardIndex();
-        if (cardIndex == -1 || cardIndex >= game.getPlayerCount()){ return; }
+        int cardIndex = game.gameData.getCardIndex();
+        if (cardIndex == -1 || cardIndex >= game.playerManager.getPlayerCount()){ return; }
 
-        PlayerManager pm = game.getPlayerManager();
-        String[] responses = pm.getPromptResponses(cardIndex, "No Response");
+        ExplainGameData data = game.gameData;
+        String[] responses = data.getPromptResponses(cardIndex, "No Response");
 
-        promptLabel.setText( pm.getPrompt(cardIndex) );
+        promptLabel.setText( data.getPrompt(cardIndex) );
         card1.setText(responses[0]);
         card2.setText(responses[1]);
 
-        if (game.getPhase() == CARD_INTRO_PHASE){
+        if (game.gameStateManager.getPhase() == CARD_INTRO_PHASE){
             introCards();
         }
 
-        else if (game.getPhase() == VOTE_PHASE){
+        else if (game.gameStateManager.getPhase() == VOTE_PHASE){
             if (introAnimationStep != -1){ resetIntro(); }
             label1.setText("Time Remaining: "+game.voteTimer.getTimeRemaining());
         }
 
-        else if (game.getPhase() == VOTE_RESULTS_PHASE){
+        else if (game.gameStateManager.getPhase() == VOTE_RESULTS_PHASE){
             showResults();
         }
     }

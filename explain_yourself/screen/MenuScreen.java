@@ -137,7 +137,7 @@ public class MenuScreen extends BasicScreen {
         g.setFont(FONT.deriveFont(35f));
         g.drawString("Players:",20,300);
         g.setFont(FONT.deriveFont(20f));
-        List<String> players = game.getPlayers();
+        List<String> players = game.playerManager.getPlayers();
         for (int i = 0; i < players.size(); i++){
             String pName = players.get(i);
             g.drawString(pName, 40,330+25*i);

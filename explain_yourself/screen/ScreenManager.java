@@ -10,7 +10,7 @@ import javax.swing.*;
 
 import explain_yourself.*;
 import library.graphics.*;
-import static explain_yourself.GameConfigs.*;
+import static explain_yourself.ExplainGameConfigs.*;
 
 public class ScreenManager extends JPanel {
 
@@ -40,7 +40,7 @@ public class ScreenManager extends JPanel {
         setFocusable(true);
 
         game = new ExplainGame();
-        lastPhase = game.getPhase();
+        lastPhase = game.gameStateManager.getPhase();
 
         addKeyListener(new DebugKeys(game));
 
@@ -73,9 +73,9 @@ public class ScreenManager extends JPanel {
 
     protected void update() {
 
-        if (game.getPhase() != lastPhase){
-            lastPhase = game.getPhase();
-            switch (game.getPhase()) {
+        if (game.gameStateManager.getPhase() != lastPhase){
+            lastPhase = game.gameStateManager.getPhase();
+            switch (game.gameStateManager.getPhase()) {
                 case JOIN_PHASE:
                     setScreen(menuScreen);
                     break;
