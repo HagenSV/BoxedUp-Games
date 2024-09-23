@@ -24,10 +24,8 @@ public class Server {
 
     HttpServer server;
 
-    public Server(HttpHandler h) throws IOException {
+    public Server() throws IOException {
         server = HttpServer.create(new InetSocketAddress(80), 0);
-            
-        server.createContext("/",h);
     
         ThreadPoolExecutor threadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         server.setExecutor(threadPool);
