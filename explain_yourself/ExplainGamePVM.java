@@ -2,13 +2,14 @@ package explain_yourself;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import library.webgame.PlayerViewManager;
 import library.webgame.api.APIRequest;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
 import java.io.IOException;
 
-public class PlayerViewManager extends library.webgame.PlayerViewManager {
+public class ExplainGamePVM extends PlayerViewManager {
 
     @Override
     public void sendScreen(HttpExchange exchange, int playerId) {
