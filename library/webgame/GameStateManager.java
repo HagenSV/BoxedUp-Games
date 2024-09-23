@@ -2,18 +2,16 @@ package library.webgame;
 
 public class GameStateManager {
     private int gamePhase;
-    private ServerViewManager output;
+    protected WebGame game;
 
-    public GameStateManager(ServerViewManager out){
-        this.output = out;
-    }
+    public GameStateManager(){}
 
     public int getPhase(){
         return gamePhase;
     }
 
     public void setPhase(int phase){
-        output.renderScreen(phase);
+        game.serverViewManager.renderScreen(phase);
         this.gamePhase = phase;
     }
 }

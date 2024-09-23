@@ -2,19 +2,9 @@ package library.webgame;
 
 public abstract class ServerViewManager {
 
-    private PlayerManager playerManager;
+    protected WebGame game;
 
-    public ServerViewManager(PlayerManager playerManager){
-        this.playerManager = playerManager;
-    }
-
-    /**
-     * Gets the player manager tied to this output manager
-     * @return
-     */
-    protected PlayerManager getPlayerManager(){
-        return playerManager;
-    }
+    public ServerViewManager(){}
 
     /**
      * Called whenever the game phase changes

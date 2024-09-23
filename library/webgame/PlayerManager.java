@@ -11,6 +11,8 @@ public class PlayerManager {
     private List<String> playerList;
     private List<Integer> playerPhase;
 
+    protected WebGame game;
+
     /**
      * Creates a new player manager
      * @param minPlayers the minimum number of players required for the game to start
