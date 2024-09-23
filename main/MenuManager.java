@@ -100,6 +100,7 @@ public class MenuManager extends JPanel {
                 try {
                     new explain_yourself.screen.ScreenManager(window);
                 } catch (IOException e1) {
+                    //TODO Show popup: failed to start server
                     e1.printStackTrace();
                 }
             }
