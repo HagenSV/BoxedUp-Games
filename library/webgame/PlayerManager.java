@@ -3,7 +3,7 @@ package library.webgame;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PlayerManager {
+public class PlayerManager {
 
     private final int MIN_PLAYERS;
     private final int MAX_PLAYERS;
@@ -58,12 +58,6 @@ public abstract class PlayerManager {
     public int getPlayerCount(){
         return playerList.size();
     }
-
-    /**
-     * Gets player data
-     * @return an object storing all players' data
-     */
-    public abstract Object getPlayerData();
 
     /**
      * 
