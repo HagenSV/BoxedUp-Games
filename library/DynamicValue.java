@@ -6,6 +6,10 @@ public class DynamicValue {
     int targetValue;
     long startTime;
     long interTime;
+
+    public DynamicValue(){
+        setValue(0);
+    }
     
     public DynamicValue(int startValue){
         setValue(startValue);
