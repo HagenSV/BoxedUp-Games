@@ -9,7 +9,7 @@ public abstract class OutputManager {
     }
 
     protected PlayerManager getPlayerManager(){
-        return this.getPlayerManager();
+        return playerManager;
     }
 
     /**
