@@ -59,11 +59,19 @@ public class MenuScreen extends BasicScreen {
         label2.setLocation(20,label1.getY()+label1.getHeight());
         add(label2);
         
-        Server.generateQR("margin=0&size=300&light=d6f5f5");
-        qrCode = new JLabel(new ImageIcon("qrcode.png"));
-        qrCode.setSize(300, 300);
-        qrCode.setLocation(getWidth()-qrCode.getWidth()-30,30);
-        add(qrCode);
+        try {
+            Server.generateQR("margin=0&size=300&light=d6f5f5");
+            qrCode = new JLabel(new ImageIcon("qrcode.png"));
+            qrCode.setSize(300, 300);
+            qrCode.setLocation(getWidth()-qrCode.getWidth()-30,30);
+            add(qrCode);
+        } catch (Exception e){
+            qrCode.setText("Failed to generate QR Code");
+            qrCode.setFont(FONT.deriveFont(30f));
+            qrCode.setSize(300,30);
+            qrCode.setLocation(getWidth()-qrCode.getWidth()-30,30);
+            add(qrCode);
+        }
 
         //Button initialization
         startButton = new JButton("Start");
