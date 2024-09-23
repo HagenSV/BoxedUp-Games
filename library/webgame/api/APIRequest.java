@@ -43,7 +43,7 @@ public abstract class APIRequest implements HttpHandler {
         return sessionId.equals(game.GAME_ID) ? playerId : -1;
     }
 
-    public static void sendString( HttpExchange exchange, int rCode, String s ) throws IOException {
+    public static void sendResponse( HttpExchange exchange, int rCode, String s ) throws IOException {
         exchange.sendResponseHeaders( rCode, s.length() );
 
         OutputStream out = exchange.getResponseBody();
@@ -52,7 +52,7 @@ public abstract class APIRequest implements HttpHandler {
         out.close();
     }
 
-    public static void sendFile( HttpExchange exchange, int rCode, File f ) throws IOException {
+    public static void sendResponse( HttpExchange exchange, int rCode, File f ) throws IOException {
         exchange.sendResponseHeaders( rCode, f.length() );
 
         OutputStream out = exchange.getResponseBody();
