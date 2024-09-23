@@ -65,7 +65,7 @@ public class ExplainGame extends WebGame {
         if (gamePhase == CARD_INTRO_PHASE){
             cardIndex++;
             if (cardIndex == getPlayerCount()){
-                game_over();
+                endGame();
             }
         }
 
@@ -87,10 +87,10 @@ public class ExplainGame extends WebGame {
         setPhase(PROMPT_PHASE);
     }
 
-    public void game_over(){
+    @Override
+    public void endGame(){
         setPhase(GAME_OVER);
-
-        endGame();
+        super.endGame();
     }
 
     private void sendPrompt( HttpExchange exchange, String pName ) throws IOException {
