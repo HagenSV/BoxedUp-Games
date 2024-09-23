@@ -48,6 +48,12 @@ public abstract class PlayerManager {
         return playerName;
     }
     
+    /**
+     * @return a copy of the list of current players
+     */
+    public List<String> getPlayers(){
+        return new ArrayList<>(playerList);
+    }
 
     public int getPlayerCount(){
         return playerList.size();
