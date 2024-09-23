@@ -2,7 +2,7 @@ package explain_yourself;
 
 import java.io.File;
 
-public class GameConfigs {
+public class ExplainGameConfigs {
     public static final boolean DEBUG_MODE = true;
 
     public static final int PROMPT_TIME =   ( int )( 3*60 );
