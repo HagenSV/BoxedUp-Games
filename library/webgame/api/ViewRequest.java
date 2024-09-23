@@ -19,11 +19,11 @@ public class ViewRequest extends APIRequest {
         int playerId = validate(exchange);
 
         if (playerId == -1){
-            APIRequest.sendString(exchange, 403, "Forbidden");
+            APIRequest.sendResponse(exchange, 403, "Forbidden");
             return;
         }
 
-        game.playerViewManager.sendScreen(playerId);
+        game.playerViewManager.sendScreen(exchange, playerId);
     }
     
 }

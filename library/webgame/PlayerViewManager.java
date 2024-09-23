@@ -1,5 +1,6 @@
 package library.webgame;
 
+import com.sun.net.httpserver.HttpExchange;
 public abstract class PlayerViewManager {
     
     private GameStateManager gameStateManager;
@@ -18,5 +19,5 @@ public abstract class PlayerViewManager {
         return playerManager;
     }
 
-    public abstract void sendScreen(int playerId);
+    public abstract void sendScreen(HttpExchange exchange, int playerId);
 }
