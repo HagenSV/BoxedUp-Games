@@ -2,6 +2,7 @@ package library.webgame.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
@@ -41,6 +42,19 @@ public abstract class APIRequest implements HttpHandler {
         int playerId = game.playerManager.getPlayers().indexOf(playerName);
 
         return sessionId.equals(game.GAME_ID) ? playerId : -1;
+    }
+
+    public static String getBody(HttpExchange exchange){
+        try {
+            //Get request body
+            InputStream in = exchange.getRequestBody();
+            byte[] inBytes = new byte[ in.available() ];
+            in.read( inBytes );
+            
+            return new String( inBytes );
+        } catch (IOException e){
+            return null;
+        }
     }
 
     public static void sendResponse( HttpExchange exchange, int rCode, String s ) throws IOException {
