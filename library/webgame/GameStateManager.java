@@ -1,10 +1,10 @@
-package library;
+package library.webgame;
 
 public class GameStateManager {
     private int gamePhase;
-    private OutputManager output;
+    private ServerViewManager output;
 
-    public GameStateManager(OutputManager out){
+    public GameStateManager(ServerViewManager out){
         this.output = out;
     }
 

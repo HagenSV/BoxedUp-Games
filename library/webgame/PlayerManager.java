@@ -1,4 +1,4 @@
-package library;
+package library.webgame;
 
 import java.util.ArrayList;
 import java.util.List;

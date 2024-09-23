@@ -1,10 +1,10 @@
-package library;
+package library.webgame;
 
-public abstract class OutputManager {
+public abstract class ServerViewManager {
 
     private PlayerManager playerManager;
 
-    public OutputManager(PlayerManager playerManager){
+    public ServerViewManager(PlayerManager playerManager){
         this.playerManager = playerManager;
     }
 

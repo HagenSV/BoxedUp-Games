@@ -1,4 +1,4 @@
-package library;
+package library.webgame;
 
 public abstract class PlayerViewManager {
     
