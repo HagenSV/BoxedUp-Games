@@ -1,6 +1,6 @@
 package library.webgame;
 
-public class GameStateManager {
+public abstract class GameStateManager {
     private int gamePhase;
     protected WebGame game;
 
@@ -14,4 +14,9 @@ public class GameStateManager {
         game.serverViewManager.renderScreen(phase);
         this.gamePhase = phase;
     }
+
+    /**
+     * @return true if the game is in a state where players can join
+     */
+    public abstract boolean canJoin();
 }
