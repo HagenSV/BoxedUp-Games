@@ -8,6 +8,10 @@ public abstract class OutputManager {
         this.playerManager = playerManager;
     }
 
+    /**
+     * Gets the player manager tied to this output manager
+     * @return
+     */
     protected PlayerManager getPlayerManager(){
         return playerManager;
     }
