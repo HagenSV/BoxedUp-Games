@@ -1,6 +1,8 @@
 package library.webgame;
 
 import library.Server;
+import library.webgame.api.PlayerListRequest;
+import library.webgame.api.ViewRequest;
 
 import java.io.IOException;
 
@@ -24,6 +26,9 @@ public abstract class WebGame {
 
         gameOver = false;
         gameServer = new Server();
+
+        new ViewRequest(this);
+        new PlayerListRequest(this);
     }
 
     public abstract void start();
