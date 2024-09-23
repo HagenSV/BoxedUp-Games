@@ -1,7 +1,6 @@
 package main;
 import explain_yourself.ExplainGame;
-
-import library.WebGame;
+import library.webgame.WebGame;
 
 import java.net.InetAddress;
 import java.util.Scanner;
