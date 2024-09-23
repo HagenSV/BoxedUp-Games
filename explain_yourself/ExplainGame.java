@@ -2,36 +2,40 @@ package explain_yourself;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static explain_yourself.GameConfigs.*;
+import static explain_yourself.ExplainGameConfigs.*;
 
 import com.sun.net.httpserver.HttpExchange;
 
 import library.Timer;
-import library.WebGame;
+import library.webgame.GameStateManager;
+import library.webgame.PlayerManager;
+import library.webgame.PlayerViewManager;
+import library.webgame.ServerViewManager;
+import library.webgame.WebGame;
+import library.webgame.api.APIRequest;
 
 public class ExplainGame extends WebGame {
-
-    private static final Pattern namePattern = Pattern.compile( "name=([^;]*)" );
-    private static final Pattern sessionPattern = Pattern.compile( "session=(\\w*);?" );
 
     public Timer voteTimer;
     public Timer promptTimer;
 
-    private PlayerManager playerManager = null;
-
     private int cardIndex = -1;
-    private int gamePhase = JOIN_PHASE;
 
     public ExplainGame() throws IOException {
-        super( MIN_PLAYERS, MAX_PLAYERS );
+        super(
+            new PlayerManager(MIN_PLAYERS, MAX_PLAYERS),
+            new GameStateManager(),
+            new explain_yourself.PlayerViewManager(),
+            new ServerViewManager() {
+                
+            };
+        );
 
         voteTimer = new Timer(){
             @Override
             public void onExpire() {
-                if (gamePhase == VOTE_PHASE){
+                if (gameStateManager.getPhase() == VOTE_PHASE){
                     setPhase(VOTE_RESULTS_PHASE);
                 }
             }
@@ -40,23 +44,15 @@ public class ExplainGame extends WebGame {
         promptTimer = new Timer(){
             @Override
             public void onExpire() {
-                if (gamePhase == PROMPT_PHASE){
+                if (gameStateManager.getPhase() == PROMPT_PHASE){
                     setPhase(CARD_INTRO_PHASE);
                 }
             }
         };
     }
-
-    public int getPhase(){
-        return gamePhase;
-    }
-
+    
     public int getCardIndex(){
         return cardIndex;
-    }
-
-    public PlayerManager getPlayerManager(){
-        return playerManager;
     }
 
     public void setPhase(int phase){
@@ -64,7 +60,7 @@ public class ExplainGame extends WebGame {
 
         if (gamePhase == CARD_INTRO_PHASE){
             cardIndex++;
-            if (cardIndex == getPlayerCount()){
+            if (cardIndex == playerManager.getPlayerCount()){
                 endGame();
             }
         }
@@ -83,7 +79,6 @@ public class ExplainGame extends WebGame {
     @Override
     public void start(){
         cardIndex = -1;
-        playerManager = new PlayerManager(this);
         setPhase(PROMPT_PHASE);
     }
 
@@ -96,59 +91,6 @@ public class ExplainGame extends WebGame {
     private void sendPrompt( HttpExchange exchange, String pName ) throws IOException {
         int playerId = getPlayers().indexOf( pName ); 
         sendString( exchange, 200, playerManager.getPrompt( playerId, playerManager.getResponseCount(playerId) ) );
-    }
-
-    private void sendPage( HttpExchange exchange, String pname ) throws IOException {
-
-        if (gamePhase == JOIN_PHASE) {
-            sendString(exchange, 208, "Already Sent");
-            return;
-        }
-
-        int playerId = getPlayers().indexOf( pname );
-        int playerPhase = playerManager.getPlayerPhase(playerId);
-
-        if ( playerPhase == gamePhase ) {
-            sendString(exchange, 208, "Already Sent");
-            return;
-        }
-        
-        switch (gamePhase) {
-            case PROMPT_PHASE:
-                if ( playerPhase == WAIT_PHASE ) { sendFile( exchange, 200, WAIT_SCREEN); } 
-                else {
-                    sendFile( exchange, 200, RESPONSE_FORM );
-                    playerManager.setPhase( playerId, PROMPT_PHASE );
-                }
-                break;
-
-            case CARD_INTRO_PHASE:
-                sendFile(exchange, 200, WAIT_SCREEN);
-                playerManager.setPhase(playerId, CARD_INTRO_PHASE);
-                break;
-
-            case VOTE_PHASE:
-                if ( playerPhase == WAIT_PHASE ) { sendFile( exchange, 200, WAIT_SCREEN); }
-                else {
-                    sendFile( exchange, 200, CARD_CHOOSER );
-                    playerManager.setPhase( playerId, VOTE_PHASE );
-                }
-                break;
-
-            case VOTE_RESULTS_PHASE:
-                sendFile(exchange, 200, WAIT_SCREEN);
-                playerManager.setPhase(playerId, VOTE_RESULTS_PHASE);
-                break;
-
-            case GAME_OVER:
-                sendFile( exchange, 200, GAME_OVER_SCREEN );
-                playerManager.setPhase( playerId, GAME_OVER );
-                break;
-
-            default:
-                sendString( exchange, 418, "I AM A TEA POT :D" );
-                break;
-        }
     }
 
     private void saveResponse( HttpExchange exchange, int playerId, String data ) throws IOException {
@@ -180,43 +122,6 @@ public class ExplainGame extends WebGame {
         if (advancePhase){ 
             setPhase(CARD_INTRO_PHASE);
         }
-    }
-
-    private void get( HttpExchange exchange ) throws IOException {
-        String path = exchange.getRequestURI().toString();
-        File file = null;
-
-        //Get cookies sent with the request
-        String cookies = exchange.getRequestHeaders().getFirst("Cookie");
-        cookies = cookies == null ? "" : cookies;
-
-        //Matchers
-        Matcher nameCookie = namePattern.matcher( cookies );
-        Matcher sessionCookie = sessionPattern.matcher( cookies );
-
-        //Player info
-        String sessionId = sessionCookie.find() ? sessionCookie.group(1) : "";
-        String playerName = nameCookie.find() ? nameCookie.group(1) : "";
-        int playerId = getPlayers().indexOf(playerName);
-
-        file = new File( DIRECTORY, path.substring( 1 ) );
-
-        if ( path.equals( "/" ) ) {
-            file = (gamePhase == JOIN_PHASE) ? JOIN_GAME_FORM : GAME_CLOSED;
-        }
-
-        if ( path.equals( "/" ) && sessionId.matches( GAME_ID ) && playerId != -1 ) {
-            playerManager.setPhase(playerId, JOIN_PHASE);
-            file = GAME_PAGE;
-        }
-
-        if ( file == null || !file.exists() ) {
-            sendString(exchange, 404, "Error 404 - not found");
-            return;
-        } 
-        
-        sendFile( exchange, 200, file );
-
     }
 
     private void post( HttpExchange exchange ) throws IOException {
