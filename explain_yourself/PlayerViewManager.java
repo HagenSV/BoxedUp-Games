@@ -2,24 +2,18 @@ package explain_yourself;
 
 import com.sun.net.httpserver.HttpExchange;
 
-import library.webgame.GameStateManager;
-import library.webgame.PlayerManager;
 import library.webgame.api.APIRequest;
 
-import static explain_yourself.GameConfigs.*;
+import static explain_yourself.ExplainGameConfigs.*;
 
 import java.io.IOException;
 
 public class PlayerViewManager extends library.webgame.PlayerViewManager {
 
-    public PlayerViewManager(GameStateManager gsm, PlayerManager pm) {
-        super(gsm, pm);
-    }
-
     @Override
     public void sendScreen(HttpExchange exchange, int playerId) {
-        int gamePhase = gameStateManager.getPhase();
-        int playerPhase = playerManager.getPlayerPhase(playerId);
+        int gamePhase = game.gameStateManager.getPhase();
+        int playerPhase = game.playerManager.getPlayerPhase(playerId);
 
         try {
 
@@ -33,31 +27,31 @@ public class PlayerViewManager extends library.webgame.PlayerViewManager {
                     if ( playerPhase == WAIT_PHASE ) { APIRequest.sendResponse( exchange, 200, WAIT_SCREEN); } 
                     else {
                         APIRequest.sendResponse( exchange, 200, RESPONSE_FORM );
-                        playerManager.setPlayerPhase( playerId, PROMPT_PHASE );
+                        game.playerManager.setPlayerPhase( playerId, PROMPT_PHASE );
                     }
                     break;
 
                 case CARD_INTRO_PHASE:
                     APIRequest.sendResponse(exchange, 200, WAIT_SCREEN);
-                    playerManager.setPlayerPhase(playerId, CARD_INTRO_PHASE);
+                    game.playerManager.setPlayerPhase(playerId, CARD_INTRO_PHASE);
                     break;
 
                 case VOTE_PHASE:
                     if ( playerPhase == WAIT_PHASE ) { APIRequest.sendResponse( exchange, 200, WAIT_SCREEN); }
                     else {
                         APIRequest.sendResponse( exchange, 200, CARD_CHOOSER );
-                        playerManager.setPlayerPhase( playerId, VOTE_PHASE );
+                        game.playerManager.setPlayerPhase( playerId, VOTE_PHASE );
                     }
                     break;
 
                 case VOTE_RESULTS_PHASE:
                     APIRequest.sendResponse(exchange, 200, WAIT_SCREEN);
-                    playerManager.setPlayerPhase(playerId, VOTE_RESULTS_PHASE);
+                    game.playerManager.setPlayerPhase(playerId, VOTE_RESULTS_PHASE);
                     break;
 
                 case GAME_OVER:
                     APIRequest.sendResponse( exchange, 200, GAME_OVER_SCREEN );
-                    playerManager.setPlayerPhase( playerId, GAME_OVER );
+                    game.playerManager.setPlayerPhase( playerId, GAME_OVER );
                     break;
 
                 default:
