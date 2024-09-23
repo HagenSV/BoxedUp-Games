@@ -76,6 +76,17 @@ public abstract class PlayerManager {
 
     public boolean hasMin(){ return playerList.size() >= MIN_PLAYERS; }
 
+
+    /**
+     * Sets the phase of ALL the players in the game
+     * @param phase
+     */
+    public void setAllPlayerPhases(int phase){
+        for (int i = 0; i < playerPhase.size(); i++){
+            playerPhase.set(i,phase);
+        }
+    }
+
     /**
      * Sets the phase of a player
      * @param playerId
