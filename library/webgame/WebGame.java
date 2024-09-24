@@ -1,11 +1,7 @@
 package library.webgame;
 
 import library.Server;
-import library.webgame.api.PlayerListRequest;
-import library.webgame.api.ViewRequest;
-
 import java.io.IOException;
-
 
 public class WebGame {
 
