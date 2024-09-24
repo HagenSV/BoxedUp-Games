@@ -1,10 +1,9 @@
 package explain_yourself.screen;
 
-import static explain_yourself.screen.ScreenManager.*;
-
 import java.awt.Graphics;
 
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameVM;
+import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 
 public class ScoresScreen extends BasicScreen {
@@ -18,8 +17,8 @@ public class ScoresScreen extends BasicScreen {
 
     private DynamicValue displayScores;
 
-    public ScoresScreen(ScreenManager sm){
-        super(sm);
+    public ScoresScreen(ExplainGameVM explainGameVM){
+        super(explainGameVM);
 
         initialized = false;
     }

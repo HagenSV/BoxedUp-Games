@@ -3,7 +3,6 @@ package explain_yourself.screen;
 import static explain_yourself.ExplainGameConfigs.CARD_INTRO_PHASE;
 import static explain_yourself.ExplainGameConfigs.VOTE_PHASE;
 import static explain_yourself.ExplainGameConfigs.VOTE_RESULTS_PHASE;
-import static explain_yourself.screen.ScreenManager.*;
 
 import java.awt.Graphics;
 
@@ -11,7 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
 import explain_yourself.ExplainGameData;
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameVM;
+import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.webgame.PlayerManager;
 
@@ -41,8 +41,8 @@ public class CardScreen extends BasicScreen {
     private DynamicValue revealCard1;
     private DynamicValue revealCard2;
 
-    public CardScreen(ScreenManager sm) {
-        super(sm);
+    public CardScreen(ExplainGameVM explainGameVM) {
+        super(explainGameVM);
         
         label1 = new JLabel("Time Remaining: "+game.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));

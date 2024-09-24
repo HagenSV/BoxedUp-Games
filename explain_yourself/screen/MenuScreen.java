@@ -1,7 +1,5 @@
 package explain_yourself.screen;
 
-import static explain_yourself.screen.ScreenManager.*;
-
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameVM;
+import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.Server;
 import library.graphics.BlankButton;
@@ -33,8 +32,8 @@ public class MenuScreen extends BasicScreen {
     private boolean initialized;
     private boolean transition;
 
-    public MenuScreen(ScreenManager sm){
-        super(sm);
+    public MenuScreen(ExplainGameVM explainGameVM){
+        super(explainGameVM);
         this.transition = false;
 
         label1Offset = new DynamicValue(0);
@@ -98,8 +97,8 @@ public class MenuScreen extends BasicScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.endGame();
-                screenManager.getWindow().setScene(MenuManager.getInstance());
-            }    
+                screenManager.window.setScene(MenuManager.getInstance());
+            }
         });
         add(exitButton);
 

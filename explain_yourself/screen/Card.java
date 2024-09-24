@@ -1,6 +1,6 @@
 package explain_yourself.screen;
 
-import static explain_yourself.screen.ScreenManager.BACKGROUND_COLOR;
+import static explain_yourself.ExplainGameVM.*;
 
 import java.awt.Color;
 

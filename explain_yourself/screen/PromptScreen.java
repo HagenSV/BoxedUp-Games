@@ -1,14 +1,13 @@
 package explain_yourself.screen;
 
-import static explain_yourself.screen.ScreenManager.*;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.JLabel;
 
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameVM;
+import static explain_yourself.ExplainGameVM.*;
 
 public class PromptScreen extends BasicScreen {
     JLabel label1;
@@ -16,8 +15,8 @@ public class PromptScreen extends BasicScreen {
 
     private boolean initialized;
 
-    public PromptScreen(ScreenManager sm){
-        super(sm);
+    public PromptScreen(ExplainGameVM explainGameVM){
+        super(explainGameVM);
 
         label1 = new JLabel("Time Remaining: "+game.promptTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
