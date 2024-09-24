@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import library.webgame.PlayerManager;
+
 public class ExplainGameData {
     private static final File PROMPT_FILE = new File("game_files/explain_yourself/data/prompts.txt");
     private static final File COUNTRIES_FILE = new File("game_files/explain_yourself/data/countries.txt");
@@ -13,7 +15,7 @@ public class ExplainGameData {
 
     private static final int PROMPTS_PER_PLAYER = 2;
 
-    private final int PLAYER_COUNT;
+    private int PLAYER_COUNT;
 
     //Stores the prompts
     private String[] prompts;
@@ -33,19 +35,32 @@ public class ExplainGameData {
     //If the player has voted for the current card
     private boolean[] voted;
 
-    public ExplainGameData(int playerCount){
-        PLAYER_COUNT = playerCount;
+    private int cardIndex;
 
-        prompts = new String[playerCount];
-        playerPrompts = new int[playerCount][PROMPTS_PER_PLAYER];
-        playerResponses = new String[playerCount][PROMPTS_PER_PLAYER];
-        votes = new int[playerCount][PROMPTS_PER_PLAYER];
+    private final PlayerManager playerManager;
 
-        promptsSubmitted = new int[playerCount];
-        voted = new boolean[playerCount];
+    public ExplainGameData(PlayerManager pm){
+        playerManager = pm;
+    }
+
+    public void init(){
+        PLAYER_COUNT = playerManager.getPlayerCount();
+        prompts = new String[PLAYER_COUNT];
+        playerPrompts = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+        playerResponses = new String[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+        votes = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+
+        promptsSubmitted = new int[PLAYER_COUNT];
+        voted = new boolean[PLAYER_COUNT];
+
+        cardIndex = -1;
 
         generatePrompts();
         assignPrompts();
+    }
+
+    public int getCardIndex(){
+        return cardIndex;
     }
 
     public String getPrompt(int promptId){
@@ -89,6 +104,10 @@ public class ExplainGameData {
 
     public int getVotes(int promptId, int responseNum){
         return votes[promptId][responseNum];
+    }
+
+    public void nextCard(){
+        cardIndex += 1;
     }
 
 
@@ -140,13 +159,13 @@ public class ExplainGameData {
         List<String> promptPool = readFile(PROMPT_FILE);
         List<String> countryPool = readFile(COUNTRIES_FILE);
         List<String> placesPool = readFile(PLACES_FILE);
-        List<String> playerPool = getPlayers();
+        List<String> playerPool = playerManager.getPlayers();
 
         for (int i = 0; i < PLAYER_COUNT ; i++ ){
             if ( promptPool.isEmpty() ) { promptPool = readFile(PROMPT_FILE); }
             if ( countryPool.isEmpty()) { countryPool = readFile(COUNTRIES_FILE); }
             if ( placesPool.isEmpty() ) { placesPool = readFile(PLACES_FILE); }
-            if ( placesPool.isEmpty() ) { playerPool = getPlayers(); }
+            if ( placesPool.isEmpty() ) { playerPool = playerManager.getPlayers(); }
 
             String prompt = removeRandom(promptPool);
             
