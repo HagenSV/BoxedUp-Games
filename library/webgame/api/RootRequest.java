@@ -28,7 +28,12 @@ public class RootRequest extends APIRequest {
 
         File toSend = new File(DIRECTORY,path);
 
-        if (!file.exists())
+        if (!toSend.exists()){
+            send404NotFound(exchange);
+            return;
+        }
+
+        sendResponse(exchange, 200, toSend);
     }
     
 }
