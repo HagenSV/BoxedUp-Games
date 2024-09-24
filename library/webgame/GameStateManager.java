@@ -19,4 +19,7 @@ public abstract class GameStateManager {
      * @return true if the game is in a state where players can join
      */
     public abstract boolean canJoin();
+
+    public abstract void start();
+    public abstract void endGame();
 }

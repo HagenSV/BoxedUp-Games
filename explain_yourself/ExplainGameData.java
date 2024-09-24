@@ -37,10 +37,10 @@ public class ExplainGameData {
 
     private int cardIndex;
 
-    private final PlayerManager playerManager;
+    private final ExplainGame game;
 
-    public ExplainGameData(PlayerManager pm){
-        playerManager = pm;
+    public ExplainGameData(ExplainGame g){
+        game = g;
     }
 
     public void init(){

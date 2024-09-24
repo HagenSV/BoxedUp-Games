@@ -39,13 +39,16 @@ public abstract class WebGame {
         new PlayerListRequest(this);
     }
 
-    public abstract void start();
+    public void start(){
+        gameStateManager.start();
+    }
 
     public boolean canStart(){ return playerManager.hasMin(); }
 
     public boolean isOver(){ return gameOver; }
 
     public void endGame(){
+        gameStateManager.endGame();
         gameOver = true;
         gameServer.close();
     }
