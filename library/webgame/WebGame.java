@@ -7,7 +7,7 @@ import library.webgame.api.ViewRequest;
 import java.io.IOException;
 
 
-public abstract class WebGame {
+public class WebGame {
 
     public final String GAME_ID;
 
