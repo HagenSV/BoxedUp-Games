@@ -2,7 +2,6 @@ package explain_yourself;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
-import library.Timer;
 import library.webgame.GameStateManager;
 
 public class ExplainGameSM extends GameStateManager {
