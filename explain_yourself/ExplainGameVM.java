@@ -13,6 +13,8 @@ import explain_yourself.screen.MenuScreen;
 import explain_yourself.screen.PromptScreen;
 import explain_yourself.screen.ScoresScreen;
 import static explain_yourself.ExplainGameConfigs.*;
+
+import library.graphics.DefaultLabel;
 import library.graphics.Window;
 import library.webgame.ServerViewManager;
 
@@ -32,8 +34,6 @@ public class ExplainGameVM extends ServerViewManager {
     private BasicScreen scoresScreen;
     private BasicScreen cardScreen;
     private BasicScreen promptScreen;
-
-    
 
     public ExplainGameVM(Window w, ExplainGame game){
         this.window = w;
@@ -89,6 +89,7 @@ public class ExplainGameVM extends ServerViewManager {
         }
         currentScreen = s;
         panel.add(currentScreen,BorderLayout.CENTER);
+        panel.validate();
     }
 
     public static class BasicScreen extends JPanel {
@@ -102,7 +103,7 @@ public class ExplainGameVM extends ServerViewManager {
             this.game = sm.game;
             setBackground(BACKGROUND_COLOR);
             setLayout(null);
-            title = new JLabel("Explain Yourself!",JLabel.LEFT);
+            title = new DefaultLabel("Explain Yourself!",JLabel.LEFT);
             title.setFont(FONT.deriveFont(Font.BOLD).deriveFont(50f));
             title.setBounds(20,20,480,50);
             add(title);
