@@ -27,6 +27,7 @@ public class JoinRequest extends APIRequest {
         //Player is already authenticated
         if ( validate(exchange) != -1 ) {
             game.playerManager.setPlayerPhase(getPlayerId(exchange), JOIN_PHASE);
+            sendResponse(exchange, 200, GAME_PAGE);
             return;
         }
 
