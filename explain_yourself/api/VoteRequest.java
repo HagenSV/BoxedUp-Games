@@ -8,13 +8,13 @@ import explain_yourself.ExplainGameData;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
-public class Vote extends APIRequest {
+public class VoteRequest extends APIRequest {
 
     public static final String PATH = "/select-card/";
     private final ExplainGameData gameData;
 
 
-    public Vote(WebGame game, ExplainGameData gameData) {
+    public VoteRequest(WebGame game, ExplainGameData gameData) {
         super(PATH, game);
         this.gameData = gameData;
     }

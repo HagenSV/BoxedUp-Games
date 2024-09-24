@@ -9,12 +9,13 @@ import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
 import static explain_yourself.ExplainGameConfigs.*;
-public class CardData extends APIRequest {
+
+public class CardDataRequest extends APIRequest {
 
     public static final String PATH = "/card-data/";
     private final ExplainGameData gameData;
 
-    public CardData(WebGame game, ExplainGameData gameData) {
+    public CardDataRequest(WebGame game, ExplainGameData gameData) {
         super(PATH, game);
         this.gameData = gameData;
     }

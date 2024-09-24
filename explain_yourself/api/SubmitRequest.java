@@ -10,13 +10,13 @@ import library.webgame.api.APIRequest;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
-public class Submit extends APIRequest {
+public class SubmitRequest extends APIRequest {
 
     public static final String PATH = "/submit/";
 
     private final ExplainGameData gameData;
 
-    public Submit(WebGame game, ExplainGameData gameData) {
+    public SubmitRequest(WebGame game, ExplainGameData gameData) {
         super(PATH, game);
         this.gameData = gameData;
     }
