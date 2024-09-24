@@ -24,7 +24,7 @@ public class DebugKeys extends KeyAdapter {
                 break;
         
             case KeyEvent.VK_2:
-                game.start();
+                game.gameStateManager.start();
                 break;
 
             case KeyEvent.VK_3:

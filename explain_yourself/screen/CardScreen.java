@@ -11,9 +11,8 @@ import javax.swing.JTextPane;
 
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM;
-import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
-import library.webgame.PlayerManager;
+import static explain_yourself.ExplainGameVM.*;
 
 public class CardScreen extends BasicScreen {
     
@@ -44,7 +43,7 @@ public class CardScreen extends BasicScreen {
     public CardScreen(ExplainGameVM explainGameVM) {
         super(explainGameVM);
         
-        label1 = new JLabel("Time Remaining: "+game.voteTimer.getTimeRemaining());
+        label1 = new JLabel("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(500,40);
         label1.setLocation(20,title.getY()+title.getHeight()+5);
@@ -238,7 +237,7 @@ public class CardScreen extends BasicScreen {
 
         else if (game.gameStateManager.getPhase() == VOTE_PHASE){
             if (introAnimationStep != -1){ resetIntro(); }
-            label1.setText("Time Remaining: "+game.voteTimer.getTimeRemaining());
+            label1.setText("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
         }
 
         else if (game.gameStateManager.getPhase() == VOTE_RESULTS_PHASE){

@@ -79,7 +79,7 @@ public class MenuScreen extends BasicScreen {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (game.canStart()){
+                if (game.playerManager.hasMin()){
                     transition();
                 } else {
                     //TODO make label
@@ -96,7 +96,7 @@ public class MenuScreen extends BasicScreen {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.endGame();
+                game.gameStateManager.endGame();
                 screenManager.window.setScene(MenuManager.getInstance());
             }
         });
@@ -129,7 +129,7 @@ public class MenuScreen extends BasicScreen {
         if (!initialized){ return; }
 
         if (transition && !label1Offset.isInterpolating() ) {
-            game.start();
+            game.gameStateManager.start();
             resetPositions();
         }
 

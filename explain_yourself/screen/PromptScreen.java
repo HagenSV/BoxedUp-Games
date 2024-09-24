@@ -18,7 +18,7 @@ public class PromptScreen extends BasicScreen {
     public PromptScreen(ExplainGameVM explainGameVM){
         super(explainGameVM);
 
-        label1 = new JLabel("Time Remaining: "+game.promptTimer.getTimeRemaining());
+        label1 = new JLabel("Time Remaining: "+game.gameData.promptTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(400,40);
         label1.setLocation(20,25+title.getHeight());
@@ -48,7 +48,7 @@ public class PromptScreen extends BasicScreen {
             init();
         }
 
-        label1.setText("Time Remaining: "+game.promptTimer.getTimeRemaining());
+        label1.setText("Time Remaining: "+game.gameData.promptTimer.getTimeRemaining());
 
         g.setFont(FONT.deriveFont(35f));
         g.drawString("Submissions:",20,300);
