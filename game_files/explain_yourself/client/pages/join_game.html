@@ -46,5 +46,17 @@
     <div class="footer">
         <h3 id="name" class="center-text"></h3>
     </div>
+    <script>
+    name = document.getElementById("name");
+        
+    let http = new XMLHttpRequest();
+    http.open('GET', "/players");
+    http.onreadystatechange = function() {
+        if( http.readyState == 4 && http.status == 200 ) {
+            playerlist.innerHTML = http.responseText;
+        }
+    }
+    http.send();
+    </script>
 </body>
 </html>
