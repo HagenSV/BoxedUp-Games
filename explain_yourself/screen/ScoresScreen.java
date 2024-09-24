@@ -1,5 +1,6 @@
 package explain_yourself.screen;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import explain_yourself.ExplainGameVM;
@@ -71,6 +72,7 @@ public class ScoresScreen extends BasicScreen {
         }
 
         g.setFont(FONT.deriveFont(35f));
+        g.setColor(Color.black);
         g.drawString("Scores:",20,300);
         g.setFont(FONT.deriveFont(20f));
         //Display scores

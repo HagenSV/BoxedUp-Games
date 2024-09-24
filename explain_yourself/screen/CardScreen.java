@@ -11,7 +11,10 @@ import javax.swing.JTextPane;
 
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM;
+import explain_yourself.ExplainGameVM.BasicScreen;
 import library.DynamicValue;
+import library.graphics.DefaultLabel;
+
 import static explain_yourself.ExplainGameVM.*;
 
 public class CardScreen extends BasicScreen {
@@ -43,7 +46,7 @@ public class CardScreen extends BasicScreen {
     public CardScreen(ExplainGameVM explainGameVM) {
         super(explainGameVM);
         
-        label1 = new JLabel("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
+        label1 = new DefaultLabel("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(500,40);
         label1.setLocation(20,title.getY()+title.getHeight()+5);
@@ -55,7 +58,7 @@ public class CardScreen extends BasicScreen {
         label2.setLocation(getWidth()/2-label2.getWidth()/2,getHeight()-label2.getHeight()-50);
         add(label2);
 
-        promptLabel = new JLabel("",JLabel.CENTER);
+        promptLabel = new DefaultLabel("",JLabel.CENTER);
         promptLabel.setFont(FONT.deriveFont(30f));
         promptLabel.setSize(getWidth(),40);
         promptLabel.setLocation(0, label1.getY()+label1.getHeight()+70);
@@ -70,19 +73,22 @@ public class CardScreen extends BasicScreen {
         add(card2);
         add(card1);
 
-        votes1Lbl = new JLabel("99");
+        votes1Lbl = new DefaultLabel("99");
         votes1Lbl.setFont(FONT.deriveFont(30f));
-        votes1Lbl.setSize(30,20);
+        votes1Lbl.setSize(50,30);
+        votes1Lbl.setVisible(false);
         add(votes1Lbl);
 
-        votes2Lbl = new JLabel("99");
+        votes2Lbl = new DefaultLabel("99");
         votes2Lbl.setFont(FONT.deriveFont(30f));
-        votes2Lbl.setSize(30,30);
+        votes2Lbl.setSize(50,30);
+        votes2Lbl.setVisible(false);
         add(votes2Lbl);
 
-        winnerLbl = new JLabel("Winner!");
+        winnerLbl = new DefaultLabel("Winner!");
         winnerLbl.setFont(FONT.deriveFont(20f));
         winnerLbl.setSize(100,30);
+        winnerLbl.setVisible(false);
         add(winnerLbl);
 
 

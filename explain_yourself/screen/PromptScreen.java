@@ -7,6 +7,9 @@ import java.util.List;
 import javax.swing.JLabel;
 
 import explain_yourself.ExplainGameVM;
+import explain_yourself.ExplainGameVM.BasicScreen;
+import library.graphics.DefaultLabel;
+
 import static explain_yourself.ExplainGameVM.*;
 
 public class PromptScreen extends BasicScreen {
@@ -18,13 +21,13 @@ public class PromptScreen extends BasicScreen {
     public PromptScreen(ExplainGameVM explainGameVM){
         super(explainGameVM);
 
-        label1 = new JLabel("Time Remaining: "+game.gameData.promptTimer.getTimeRemaining());
+        label1 = new DefaultLabel("Time Remaining: "+game.gameData.promptTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(400,40);
         label1.setLocation(20,25+title.getHeight());
         add(label1);
 
-        label2 = new JLabel("Answer the prompts on your device");
+        label2 = new DefaultLabel("Answer the prompts on your device");
         label2.setFont(FONT.deriveFont(35f));
         label2.setSize(700,40);
         label2.setLocation(20,25+title.getHeight()+label1.getHeight());

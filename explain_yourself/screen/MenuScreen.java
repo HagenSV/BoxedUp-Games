@@ -14,6 +14,7 @@ import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.Server;
 import library.graphics.BlankButton;
+import library.graphics.DefaultLabel;
 import main.MenuManager;
 
 public class MenuScreen extends BasicScreen {
@@ -46,13 +47,13 @@ public class MenuScreen extends BasicScreen {
             ipAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (Exception e){}
 
-        label1 = new JLabel("Go to "+ipAddress);
+        label1 = new DefaultLabel("Go to "+ipAddress);
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(400,40);
         label1.setLocation(20,5+title.getY()+title.getHeight());
         add(label1);
 
-        label2 = new JLabel("or scan code to join");
+        label2 = new DefaultLabel("or scan code to join");
         label2.setFont(FONT.deriveFont(35f));
         label2.setSize(400,40);
         label2.setLocation(20,label1.getY()+label1.getHeight());
@@ -65,7 +66,7 @@ public class MenuScreen extends BasicScreen {
             qrCode.setLocation(getWidth()-qrCode.getWidth()-30,30);
             add(qrCode);
         } catch (Exception e){
-            qrCode.setText("Failed to generate QR Code");
+            qrCode = new DefaultLabel("Failed to generate QR Code");
             qrCode.setFont(FONT.deriveFont(30f));
             qrCode.setSize(300,30);
             qrCode.setLocation(getWidth()-qrCode.getWidth()-30,30);
@@ -96,7 +97,7 @@ public class MenuScreen extends BasicScreen {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.gameStateManager.endGame();
+                game.game.endGame();
                 screenManager.window.setScene(MenuManager.getInstance());
             }
         });
