@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import library.webgame.PlayerManager;
+import library.Timer;
+
+import static explain_yourself.ExplainGameConfigs.*;
 
 public class ExplainGameData {
     private static final File PROMPT_FILE = new File("game_files/explain_yourself/data/prompts.txt");
@@ -39,12 +41,33 @@ public class ExplainGameData {
 
     private final ExplainGame game;
 
+    public final Timer voteTimer;
+    public final Timer promptTimer;
+
     public ExplainGameData(ExplainGame g){
         game = g;
+
+        voteTimer = new Timer(){
+            @Override
+            public void onExpire() {
+                if (game.gameStateManager.getPhase() == VOTE_PHASE){
+                    game.gameStateManager.setPhase(VOTE_RESULTS_PHASE);
+                }
+            }
+        };
+
+        promptTimer = new Timer(){
+            @Override
+            public void onExpire() {
+                if (game.gameStateManager.getPhase() == PROMPT_PHASE){
+                    game.gameStateManager.setPhase(CARD_INTRO_PHASE);
+                }
+            }
+        };
     }
 
     public void init(){
-        PLAYER_COUNT = playerManager.getPlayerCount();
+        PLAYER_COUNT = game.playerManager.getPlayerCount();
         prompts = new String[PLAYER_COUNT];
         playerPrompts = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
         playerResponses = new String[PLAYER_COUNT][PROMPTS_PER_PLAYER];
@@ -159,13 +182,13 @@ public class ExplainGameData {
         List<String> promptPool = readFile(PROMPT_FILE);
         List<String> countryPool = readFile(COUNTRIES_FILE);
         List<String> placesPool = readFile(PLACES_FILE);
-        List<String> playerPool = playerManager.getPlayers();
+        List<String> playerPool = game.playerManager.getPlayers();
 
         for (int i = 0; i < PLAYER_COUNT ; i++ ){
             if ( promptPool.isEmpty() ) { promptPool = readFile(PROMPT_FILE); }
             if ( countryPool.isEmpty()) { countryPool = readFile(COUNTRIES_FILE); }
             if ( placesPool.isEmpty() ) { placesPool = readFile(PLACES_FILE); }
-            if ( placesPool.isEmpty() ) { playerPool = playerManager.getPlayers(); }
+            if ( placesPool.isEmpty() ) { playerPool = game.playerManager.getPlayers(); }
 
             String prompt = removeRandom(promptPool);
             
