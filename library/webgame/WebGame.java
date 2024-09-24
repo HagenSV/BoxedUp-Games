@@ -34,9 +34,6 @@ public class WebGame {
 
         gameOver = false;
         gameServer = new Server();
-
-        new ViewRequest(this);
-        new PlayerListRequest(this);
     }
 
     public void start(){
