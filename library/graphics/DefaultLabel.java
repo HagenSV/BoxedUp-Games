@@ -11,4 +11,14 @@ public class DefaultLabel extends JLabel {
     public DefaultLabel(){
         setForeground(Color.BLACK);
     }
+
+    public DefaultLabel(String text){
+        super(text);
+        setForeground(Color.BLACK);
+    }
+
+    public DefaultLabel(String text, int align){
+        super(text,align);
+        setForeground(Color.BLACK);
+    }
 }
