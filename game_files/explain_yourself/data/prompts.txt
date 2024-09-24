@@ -31,6 +31,8 @@ Your feet and hands have switched places
 You accidentally wanted a world war
 You woke up with an extra arm
 There is a horse in your kitchen
+You are on the no fly list
+You are in Mary Poppin's handbag
 
 #Dynamic
 You are inside {player}'s dream
