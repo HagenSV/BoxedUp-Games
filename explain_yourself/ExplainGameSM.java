@@ -6,28 +6,10 @@ import library.Timer;
 import library.webgame.GameStateManager;
 
 public class ExplainGameSM extends GameStateManager {
+    public final ExplainGameData gameData;
 
-    public Timer voteTimer;
-    public Timer promptTimer;
-
-    public ExplainGameSM(){
-        voteTimer = new Timer(){
-            @Override
-            public void onExpire() {
-                if (getPhase() == VOTE_PHASE){
-                    setPhase(VOTE_RESULTS_PHASE);
-                }
-            }
-        };
-
-        promptTimer = new Timer(){
-            @Override
-            public void onExpire() {
-                if (getPhase() == PROMPT_PHASE){
-                    setPhase(CARD_INTRO_PHASE);
-                }
-            }
-        };
+    public ExplainGameSM(ExplainGameData data){
+        gameData = data;
     }
 
     @Override
@@ -36,16 +18,27 @@ public class ExplainGameSM extends GameStateManager {
         game.playerManager.setAllPlayerPhases(0);
 
         if (phase == PROMPT_PHASE){
-            promptTimer.setTime(PROMPT_TIME);
+            gameData.promptTimer.setTime(PROMPT_TIME);
         }
         else if (phase == VOTE_PHASE){
-            voteTimer.setTime(VOTE_TIME);
+            gameData.voteTimer.setTime(VOTE_TIME);
         }
     }
 
     @Override
     public boolean canJoin() {
         return getPhase() == JOIN_PHASE;
+    }
+
+    @Override
+    public void start(){
+        gameData.init();
+        setPhase(PROMPT_PHASE);
+    }
+
+    @Override
+    public void endGame(){
+        setPhase(GAME_OVER);
     }
 
 }
