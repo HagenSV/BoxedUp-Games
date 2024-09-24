@@ -16,8 +16,8 @@ import library.webgame.WebGame;
 
 public abstract class APIRequest implements HttpHandler {
     
-    private static final Pattern namePattern = Pattern.compile( "name=([^;]*)" );
-    private static final Pattern sessionPattern = Pattern.compile( "session=(\\w*);?" );
+    public static final Pattern namePattern = Pattern.compile( "name=([^;]*)" );
+    public static final Pattern sessionPattern = Pattern.compile( "session=(\\w*);?" );
     
     protected final WebGame game;
 
@@ -42,6 +42,43 @@ public abstract class APIRequest implements HttpHandler {
         int playerId = game.playerManager.getPlayers().indexOf(playerName);
 
         return sessionId.equals(game.GAME_ID) ? playerId : -1;
+    }
+
+    public String getPlayerName(HttpExchange exchange){
+        String cookies = exchange.getRequestHeaders().getFirst("Cookie");
+        cookies = cookies == null ? "" : cookies;
+
+        //Matchers
+        Matcher nameCookie = namePattern.matcher( cookies );
+
+        //Player info
+        return nameCookie.find() ? nameCookie.group(1) : null;
+    }
+
+    public int getPlayerId(HttpExchange exchange){
+        String cookies = exchange.getRequestHeaders().getFirst("Cookie");
+        cookies = cookies == null ? "" : cookies;
+
+        //Matchers
+        Matcher nameCookie = namePattern.matcher( cookies );
+
+        //Player info
+        String playerName = nameCookie.find() ? nameCookie.group(1) : "";
+        int playerId = game.playerManager.getPlayers().indexOf(playerName);
+
+        return playerId;
+    }
+
+    public String getSessionId(HttpExchange exchange){
+        String cookies = exchange.getRequestHeaders().getFirst("Cookie");
+        cookies = cookies == null ? "" : cookies;
+
+        Matcher sessionCookie = sessionPattern.matcher( cookies );
+
+        //Player info
+        String sessionId = sessionCookie.find() ? sessionCookie.group(1) : "";
+
+        return sessionId;
     }
 
     public static String getBody(HttpExchange exchange){
