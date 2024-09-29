@@ -12,7 +12,7 @@ import library.webgame.api.APIRequest;
 
 public class PromptRequest extends APIRequest {
 
-    private static final String PATH = "/prompt/";
+    private static final String PATH = "/prompt";
     private final ExplainGameData gameData;
 
     public PromptRequest(WebGame game, ExplainGameData gameData) {

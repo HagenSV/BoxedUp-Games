@@ -7,7 +7,7 @@ import com.sun.net.httpserver.HttpExchange;
 import library.webgame.WebGame;
 
 public class PlayerListRequest extends APIRequest {
-    public static final String PATH = "/players/";
+    public static final String PATH = "/players";
 
     public PlayerListRequest(WebGame game) {
         super(PATH, game);

@@ -12,7 +12,7 @@ import static explain_yourself.ExplainGameConfigs.*;
 
 public class SubmitRequest extends APIRequest {
 
-    public static final String PATH = "/submit/";
+    public static final String PATH = "/submit";
 
     private final ExplainGameData gameData;
 

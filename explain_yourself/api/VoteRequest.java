@@ -10,7 +10,7 @@ import library.webgame.api.APIRequest;
 
 public class VoteRequest extends APIRequest {
 
-    public static final String PATH = "/select-card/";
+    public static final String PATH = "/select-card";
     private final ExplainGameData gameData;
 
 

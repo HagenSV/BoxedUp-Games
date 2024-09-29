@@ -7,7 +7,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 public class ViewRequest extends APIRequest {
 
-    public static final String PATH = "/game-status/";
+    public static final String PATH = "/game-status";
 
     public ViewRequest(WebGame game){
         super(PATH,game);

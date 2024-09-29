@@ -8,7 +8,7 @@ import library.webgame.WebGame;
 
 public class NameRequest extends APIRequest {
 
-    public static final String PATH = "/name/";
+    public static final String PATH = "/name";
 
     public NameRequest(WebGame game) {
         super(PATH, game);

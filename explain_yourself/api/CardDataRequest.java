@@ -12,7 +12,7 @@ import static explain_yourself.ExplainGameConfigs.*;
 
 public class CardDataRequest extends APIRequest {
 
-    public static final String PATH = "/card-data/";
+    public static final String PATH = "/card-data";
     private final ExplainGameData gameData;
 
     public CardDataRequest(WebGame game, ExplainGameData gameData) {
