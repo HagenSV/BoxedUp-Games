@@ -46,6 +46,7 @@ public class PlayerManager {
         }
 
         playerList.add( playerName );
+        playerPhase.add( 0 );
 
         return playerName;
     }
