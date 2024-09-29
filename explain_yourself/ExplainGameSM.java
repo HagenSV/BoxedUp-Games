@@ -19,6 +19,12 @@ public class ExplainGameSM extends GameStateManager {
         if (phase == PROMPT_PHASE){
             gameData.promptTimer.setTime(PROMPT_TIME);
         }
+        else if (phase == CARD_INTRO_PHASE){
+            gameData.nextCard();
+            if (gameData.getCardIndex() == game.playerManager.getPlayerCount()){
+                endGame();
+            }
+        }
         else if (phase == VOTE_PHASE){
             gameData.voteTimer.setTime(VOTE_TIME);
         }
