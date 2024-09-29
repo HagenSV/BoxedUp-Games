@@ -82,10 +82,11 @@ public abstract class APIRequest implements HttpHandler {
     }
 
     public static String getBody(HttpExchange exchange){
+        System.out.println(exchange.getRequestMethod());
         try {
             //Get request body
             InputStream in = exchange.getRequestBody();
-            byte[] inBytes = new byte[ in.available() ];
+            byte[] inBytes = in.readAllBytes();
             in.read( inBytes );
             
             return new String( inBytes );
