@@ -76,19 +76,16 @@ public class CardScreen extends BasicScreen {
         votes1Lbl = new DefaultLabel("99");
         votes1Lbl.setFont(FONT.deriveFont(30f));
         votes1Lbl.setSize(50,30);
-        votes1Lbl.setVisible(false);
         add(votes1Lbl);
 
         votes2Lbl = new DefaultLabel("99");
         votes2Lbl.setFont(FONT.deriveFont(30f));
         votes2Lbl.setSize(50,30);
-        votes2Lbl.setVisible(false);
         add(votes2Lbl);
 
         winnerLbl = new DefaultLabel("Winner!");
         winnerLbl.setFont(FONT.deriveFont(20f));
         winnerLbl.setSize(100,30);
-        winnerLbl.setVisible(false);
         add(winnerLbl);
 
 
