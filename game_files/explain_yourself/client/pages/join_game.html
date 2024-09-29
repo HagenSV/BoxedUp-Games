@@ -50,10 +50,10 @@
     name = document.getElementById("name");
         
     let http = new XMLHttpRequest();
-    http.open('GET', "/players");
+    http.open('GET', "/name");
     http.onreadystatechange = function() {
         if( http.readyState == 4 && http.status == 200 ) {
-            playerlist.innerHTML = http.responseText;
+            name.innerText = http.responseText;
         }
     }
     http.send();
