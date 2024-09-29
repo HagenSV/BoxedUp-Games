@@ -1,5 +1,7 @@
 package library.webgame;
 
+import java.io.IOException;
+
 import com.sun.net.httpserver.HttpExchange;
 public abstract class PlayerViewManager {
     
@@ -7,5 +9,5 @@ public abstract class PlayerViewManager {
 
     public PlayerViewManager(){}
 
-    public abstract void sendScreen(HttpExchange exchange, int playerId);
+    public abstract void sendScreen(HttpExchange exchange, int playerId) throws IOException;
 }
