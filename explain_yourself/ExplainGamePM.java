@@ -2,14 +2,18 @@ package explain_yourself;
 
 import com.sun.net.httpserver.HttpExchange;
 
-import library.webgame.PlayerViewManager;
+import library.webgame.PlayerManager;
 import library.webgame.api.APIRequest;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
 import java.io.IOException;
 
-public class ExplainGamePVM extends PlayerViewManager {
+public class ExplainGamePM extends PlayerManager {
+
+    public ExplainGamePM(int minPlayers, int maxPlayers){
+       super(minPlayers,maxPlayers);
+    }
 
     @Override
     public void sendScreen(HttpExchange exchange, int playerId) throws IOException {

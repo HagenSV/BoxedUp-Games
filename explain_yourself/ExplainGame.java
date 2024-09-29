@@ -33,12 +33,11 @@ public class ExplainGame {
     public ExplainGame(Window w) throws IOException {
         gameData = new ExplainGameData(this);
 
-        playerManager = new PlayerManager(MIN_PLAYERS, MAX_PLAYERS);
+        playerManager = new ExplainGamePM(MIN_PLAYERS, MAX_PLAYERS);
         gameStateManager = new ExplainGameSM(gameData);
-        playerViewManager = new ExplainGamePVM();
         serverViewManager = new ExplainGameVM(w,this);
 
-        game = new WebGame(playerManager,gameStateManager,playerViewManager,serverViewManager);
+        game = new WebGame(playerManager,gameStateManager,serverViewManager);
 
         new RootRequest(game, DIRECTORY);
         new PlayerListRequest(game);
