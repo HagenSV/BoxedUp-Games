@@ -1,9 +1,11 @@
 package library.webgame;
 
+import com.sun.net.httpserver.HttpExchange;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerManager {
+public abstract class PlayerManager {
 
     private final int MIN_PLAYERS;
     private final int MAX_PLAYERS;
@@ -25,6 +27,8 @@ public class PlayerManager {
         playerList = new ArrayList<>(MAX_PLAYERS);
         playerPhase = new ArrayList<>(MAX_PLAYERS);
     }
+
+    public abstract void sendScreen(HttpExchange exchange, int playerId) throws IOException;
 
     /**
      * Attempts to add a player to the game
