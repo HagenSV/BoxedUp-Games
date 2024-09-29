@@ -12,7 +12,6 @@ import static explain_yourself.ExplainGameConfigs.*;
 import library.graphics.Window;
 import library.webgame.GameStateManager;
 import library.webgame.PlayerManager;
-import library.webgame.PlayerViewManager;
 import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
 import library.webgame.api.NameRequest;
@@ -24,7 +23,6 @@ public class ExplainGame {
 
     public final PlayerManager playerManager;
     public final GameStateManager gameStateManager;
-    public final PlayerViewManager playerViewManager;
     public final ServerViewManager serverViewManager;
     public final ExplainGameData gameData;
 
