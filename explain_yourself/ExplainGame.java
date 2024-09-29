@@ -5,6 +5,7 @@ import explain_yourself.api.CardDataRequest;
 import explain_yourself.api.JoinRequest;
 import explain_yourself.api.PromptRequest;
 import explain_yourself.api.SubmitRequest;
+import explain_yourself.api.VoteRequest;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
@@ -47,5 +48,6 @@ public class ExplainGame {
         new PromptRequest(game, gameData);
         new SubmitRequest(game, gameData);
         new CardDataRequest(game, gameData);
+        new VoteRequest(game, gameData);
     }
 }
