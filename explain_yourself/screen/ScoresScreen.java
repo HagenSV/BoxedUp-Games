@@ -1,10 +1,10 @@
 package explain_yourself.screen;
 
-import static explain_yourself.screen.ScreenManager.*;
-
+import java.awt.Color;
 import java.awt.Graphics;
 
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameVM;
+import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 
 public class ScoresScreen extends BasicScreen {
@@ -18,8 +18,8 @@ public class ScoresScreen extends BasicScreen {
 
     private DynamicValue displayScores;
 
-    public ScoresScreen(ScreenManager sm){
-        super(sm);
+    public ScoresScreen(ExplainGameVM explainGameVM){
+        super(explainGameVM);
 
         initialized = false;
     }
@@ -29,9 +29,9 @@ public class ScoresScreen extends BasicScreen {
         initialized = true;
 
         //Get scores
-        players = new String[game.getPlayerCount()];
-        game.getPlayers().toArray(players);
-        scores = game.getPlayerManager().calcScores();
+        players = new String[game.playerManager.getPlayerCount()];
+        game.playerManager.getPlayers().toArray(players);
+        scores = game.gameData.calcScores();
 
         //Sort scores highest to lowest
         //this algorithm is O(n^2) but that doesnt matter
@@ -59,8 +59,8 @@ public class ScoresScreen extends BasicScreen {
             players[maxIdx] = nameTmp;
         }
 
-        displayScores = new DynamicValue(game.getPlayerCount());
-        displayScores.interpolate(0, game.getPlayerCount()*REVEAL_SCORE_DELAY);
+        displayScores = new DynamicValue(game.playerManager.getPlayerCount());
+        displayScores.interpolate(0, game.playerManager.getPlayerCount()*REVEAL_SCORE_DELAY);
     }
     
     @Override
@@ -72,10 +72,11 @@ public class ScoresScreen extends BasicScreen {
         }
 
         g.setFont(FONT.deriveFont(35f));
+        g.setColor(Color.black);
         g.drawString("Scores:",20,300);
         g.setFont(FONT.deriveFont(20f));
         //Display scores
-        for (int i = game.getPlayerCount()-1; i >= displayScores.getValue(); i--){
+        for (int i = game.playerManager.getPlayerCount()-1; i >= displayScores.getValue(); i--){
             String pName = players[i];
             g.drawString(pName+": "+scores[i], 40,330+25*i);
         }

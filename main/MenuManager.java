@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import explain_yourself.ExplainGame;
 import library.graphics.Window;
 
 public class MenuManager extends JPanel {
@@ -98,8 +99,9 @@ public class MenuManager extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new explain_yourself.screen.ScreenManager(window);
+                    new ExplainGame(window);
                 } catch (IOException e1) {
+                    //TODO Show popup: failed to start server
                     e1.printStackTrace();
                 }
             }

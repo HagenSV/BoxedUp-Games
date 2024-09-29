@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("name").innerText = getCookie("name")
-
     setInterval(updateGame,500);
-
 });
 
 function updateGame(){

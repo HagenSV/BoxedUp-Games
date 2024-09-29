@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PlayerManager {
+import library.Timer;
 
+import static explain_yourself.ExplainGameConfigs.*;
+
+public class ExplainGameData {
     private static final File PROMPT_FILE = new File("game_files/explain_yourself/data/prompts.txt");
     private static final File COUNTRIES_FILE = new File("game_files/explain_yourself/data/countries.txt");
     private static final File PLACES_FILE = new File("game_files/explain_yourself/data/places.txt");
 
     private static final int PROMPTS_PER_PLAYER = 2;
-    private final int playerCount;
-    private final ExplainGame game;
+
+    private int PLAYER_COUNT;
 
     //Stores the prompts
     private String[] prompts;
@@ -27,9 +30,6 @@ public class PlayerManager {
 
     //Stores response votes as [promptId][responseNum]
     private int[][] votes;
-
-    //Phases of the player
-    private int[] playerPhases;
     
     //Number of responses submitted by a player
     private int[] promptsSubmitted;
@@ -37,22 +37,53 @@ public class PlayerManager {
     //If the player has voted for the current card
     private boolean[] voted;
 
-    public PlayerManager(ExplainGame game){
-        this.game = game;
-        this.playerCount = game.getPlayerCount();
+    private int cardIndex;
 
-        prompts = new String[playerCount];
-        playerPrompts = new int[playerCount][PROMPTS_PER_PLAYER];
-        playerResponses = new String[playerCount][PROMPTS_PER_PLAYER];
-        votes = new int[playerCount][PROMPTS_PER_PLAYER];
+    private final ExplainGame game;
 
-        playerPhases = new int[playerCount];
-        promptsSubmitted = new int[playerCount];
-        voted = new boolean[playerCount];
+    public final Timer voteTimer;
+    public final Timer promptTimer;
+
+    public ExplainGameData(ExplainGame g){
+        game = g;
+
+        voteTimer = new Timer(){
+            @Override
+            public void onExpire() {
+                if (game.gameStateManager.getPhase() == VOTE_PHASE){
+                    game.gameStateManager.setPhase(VOTE_RESULTS_PHASE);
+                }
+            }
+        };
+
+        promptTimer = new Timer(){
+            @Override
+            public void onExpire() {
+                if (game.gameStateManager.getPhase() == PROMPT_PHASE){
+                    game.gameStateManager.setPhase(CARD_INTRO_PHASE);
+                }
+            }
+        };
+    }
+
+    public void init(){
+        PLAYER_COUNT = game.playerManager.getPlayerCount();
+        prompts = new String[PLAYER_COUNT];
+        playerPrompts = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+        playerResponses = new String[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+        votes = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
+
+        promptsSubmitted = new int[PLAYER_COUNT];
+        voted = new boolean[PLAYER_COUNT];
+
+        cardIndex = -1;
 
         generatePrompts();
         assignPrompts();
+    }
 
+    public int getCardIndex(){
+        return cardIndex;
     }
 
     public String getPrompt(int promptId){
@@ -74,7 +105,7 @@ public class PlayerManager {
     public String[] getPromptResponses(int promptId, String defaultValue){
         String[] responses = new String[PROMPTS_PER_PLAYER];
 
-        for (int i = 0; i < playerCount; i++){
+        for (int i = 0; i < PLAYER_COUNT; i++){
             for (int j = 0; j < PROMPTS_PER_PLAYER; j++){
                 if (playerPrompts[i][j] == promptId){
                     responses[j] = playerResponses[i][j] == null ? defaultValue : playerResponses[i][j];
@@ -98,12 +129,16 @@ public class PlayerManager {
         return votes[promptId][responseNum];
     }
 
+    public void nextCard(){
+        cardIndex += 1;
+    }
+
 
     public int[] calcScores(){
 
-        int[] scores = new int[playerCount];
+        int[] scores = new int[PLAYER_COUNT];
 
-        for (int i = 0; i < playerCount; i++){
+        for (int i = 0; i < PLAYER_COUNT; i++){
             int prompt1Id = getPlayerPromptId(i, 0);
             int prompt2Id = getPlayerPromptId(i, 1);
 
@@ -117,20 +152,6 @@ public class PlayerManager {
         }
 
         return scores;
-    }
-
-    public int getPlayerPhase(int playerId){
-        return playerPhases[playerId];
-    }
-
-    public void setPhase(int playerId, int phase){
-        playerPhases[playerId] = phase;
-    }
-
-    public void setAllPlayerPhases(int phase){
-        for (int i = 0; i < playerPhases.length; i++){
-            playerPhases[i] = phase;
-        }
     }
 
     public int getResponseCount(int playerId){
@@ -161,13 +182,13 @@ public class PlayerManager {
         List<String> promptPool = readFile(PROMPT_FILE);
         List<String> countryPool = readFile(COUNTRIES_FILE);
         List<String> placesPool = readFile(PLACES_FILE);
-        List<String> playerPool = game.getPlayers();
+        List<String> playerPool = game.playerManager.getPlayers();
 
-        for (int i = 0; i < playerCount ; i++ ){
+        for (int i = 0; i < PLAYER_COUNT ; i++ ){
             if ( promptPool.isEmpty() ) { promptPool = readFile(PROMPT_FILE); }
             if ( countryPool.isEmpty()) { countryPool = readFile(COUNTRIES_FILE); }
             if ( placesPool.isEmpty() ) { placesPool = readFile(PLACES_FILE); }
-            if ( placesPool.isEmpty() ) { playerPool = game.getPlayers(); }
+            if ( placesPool.isEmpty() ) { playerPool = game.playerManager.getPlayers(); }
 
             String prompt = removeRandom(promptPool);
             
@@ -194,22 +215,22 @@ public class PlayerManager {
     }
 
     private void assignPrompts(){
-        List<Integer> promptPool1 = new ArrayList<Integer>(playerCount);
-        List<Integer> promptPool2 = new ArrayList<Integer>(playerCount);
+        List<Integer> promptPool1 = new ArrayList<Integer>(PLAYER_COUNT);
+        List<Integer> promptPool2 = new ArrayList<Integer>(PLAYER_COUNT);
 
-        for ( int i = 0; i < playerCount; i++ ) {
+        for ( int i = 0; i < PLAYER_COUNT; i++ ) {
             promptPool1.add(i);
             promptPool2.add(i);
         }
 
-        for ( int i = 0; i < playerCount; i++ ){
+        for ( int i = 0; i < PLAYER_COUNT; i++ ){
             playerPrompts[i][0] = ( promptPool1.remove( (int)(Math.random()*promptPool1.size() ) ) );
             playerPrompts[i][1] = ( promptPool2.remove( (int)(Math.random()*promptPool2.size() ) ) );
         }
 
-        for ( int i = 0; i < playerCount; i++ ){
+        for ( int i = 0; i < PLAYER_COUNT; i++ ){
             if ( playerPrompts[i][0] == playerPrompts[i][1] ){
-                for ( int j = 0; i < playerCount; j++ ){
+                for ( int j = 0; i < PLAYER_COUNT; j++ ){
                     if ( playerPrompts[j][1] != playerPrompts[i][0]  ){
                         int promptId = playerPrompts[j][1];
                         playerPrompts[j][1] = playerPrompts[i][1];

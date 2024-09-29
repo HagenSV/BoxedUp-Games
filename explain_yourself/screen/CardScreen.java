@@ -1,18 +1,21 @@
 package explain_yourself.screen;
 
-import static explain_yourself.GameConfigs.CARD_INTRO_PHASE;
-import static explain_yourself.GameConfigs.VOTE_PHASE;
-import static explain_yourself.GameConfigs.VOTE_RESULTS_PHASE;
-import static explain_yourself.screen.ScreenManager.*;
+import static explain_yourself.ExplainGameConfigs.CARD_INTRO_PHASE;
+import static explain_yourself.ExplainGameConfigs.VOTE_PHASE;
+import static explain_yourself.ExplainGameConfigs.VOTE_RESULTS_PHASE;
 
 import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-import explain_yourself.PlayerManager;
-import explain_yourself.screen.ScreenManager.BasicScreen;
+import explain_yourself.ExplainGameData;
+import explain_yourself.ExplainGameVM;
+import explain_yourself.ExplainGameVM.BasicScreen;
 import library.DynamicValue;
+import library.graphics.DefaultLabel;
+
+import static explain_yourself.ExplainGameVM.*;
 
 public class CardScreen extends BasicScreen {
     
@@ -40,10 +43,10 @@ public class CardScreen extends BasicScreen {
     private DynamicValue revealCard1;
     private DynamicValue revealCard2;
 
-    public CardScreen(ScreenManager sm) {
-        super(sm);
+    public CardScreen(ExplainGameVM explainGameVM) {
+        super(explainGameVM);
         
-        label1 = new JLabel("Time Remaining: "+game.voteTimer.getTimeRemaining());
+        label1 = new DefaultLabel("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(500,40);
         label1.setLocation(20,title.getY()+title.getHeight()+5);
@@ -55,7 +58,7 @@ public class CardScreen extends BasicScreen {
         label2.setLocation(getWidth()/2-label2.getWidth()/2,getHeight()-label2.getHeight()-50);
         add(label2);
 
-        promptLabel = new JLabel("",JLabel.CENTER);
+        promptLabel = new DefaultLabel("",JLabel.CENTER);
         promptLabel.setFont(FONT.deriveFont(30f));
         promptLabel.setSize(getWidth(),40);
         promptLabel.setLocation(0, label1.getY()+label1.getHeight()+70);
@@ -70,17 +73,17 @@ public class CardScreen extends BasicScreen {
         add(card2);
         add(card1);
 
-        votes1Lbl = new JLabel("99");
+        votes1Lbl = new DefaultLabel("99");
         votes1Lbl.setFont(FONT.deriveFont(30f));
-        votes1Lbl.setSize(30,20);
+        votes1Lbl.setSize(50,30);
         add(votes1Lbl);
 
-        votes2Lbl = new JLabel("99");
+        votes2Lbl = new DefaultLabel("99");
         votes2Lbl.setFont(FONT.deriveFont(30f));
-        votes2Lbl.setSize(30,30);
+        votes2Lbl.setSize(50,30);
         add(votes2Lbl);
 
-        winnerLbl = new JLabel("Winner!");
+        winnerLbl = new DefaultLabel("Winner!");
         winnerLbl.setFont(FONT.deriveFont(20f));
         winnerLbl.setSize(100,30);
         add(winnerLbl);
@@ -151,7 +154,7 @@ public class CardScreen extends BasicScreen {
         else if (introAnimationStep == 6){
             label1.setVisible(true);
             resetIntro();
-            game.setPhase(VOTE_PHASE);
+            game.gameStateManager.setPhase(VOTE_PHASE);
         }
         
     }
@@ -166,11 +169,11 @@ public class CardScreen extends BasicScreen {
     public void showResults(){
         if (animationTimer.isInterpolating()){ return; }
 
-        PlayerManager pm = game.getPlayerManager();
-        int promptId = game.getCardIndex();
+        ExplainGameData data = game.gameData;
+        int promptId = data.getCardIndex();
 
-        int votes1 = pm.getVotes(promptId,0);
-        int votes2 = pm.getVotes(promptId,1);
+        int votes1 = data.getVotes(promptId,0);
+        int votes2 = data.getVotes(promptId,1);
 
         if (resultsAnimationStep == -1){
             resultsAnimationStep++;
@@ -196,7 +199,7 @@ public class CardScreen extends BasicScreen {
         }
         else if (resultsAnimationStep == 1){
             resultsAnimationStep = -1;
-            game.setPhase(CARD_INTRO_PHASE);
+            game.gameStateManager.setPhase(CARD_INTRO_PHASE);
         }
     }
 
@@ -221,26 +224,26 @@ public class CardScreen extends BasicScreen {
         votes2Lbl.setLocation(card2.getX()+card2.getWidth()+20,card2.getY()+card2.getHeight()/2-votes2Lbl.getWidth()/2);
 
 
-        int cardIndex = game.getCardIndex();
-        if (cardIndex == -1 || cardIndex >= game.getPlayerCount()){ return; }
+        int cardIndex = game.gameData.getCardIndex();
+        if (cardIndex == -1 || cardIndex >= game.playerManager.getPlayerCount()){ return; }
 
-        PlayerManager pm = game.getPlayerManager();
-        String[] responses = pm.getPromptResponses(cardIndex, "No Response");
+        ExplainGameData data = game.gameData;
+        String[] responses = data.getPromptResponses(cardIndex, "No Response");
 
-        promptLabel.setText( pm.getPrompt(cardIndex) );
+        promptLabel.setText( data.getPrompt(cardIndex) );
         card1.setText(responses[0]);
         card2.setText(responses[1]);
 
-        if (game.getPhase() == CARD_INTRO_PHASE){
+        if (game.gameStateManager.getPhase() == CARD_INTRO_PHASE){
             introCards();
         }
 
-        else if (game.getPhase() == VOTE_PHASE){
+        else if (game.gameStateManager.getPhase() == VOTE_PHASE){
             if (introAnimationStep != -1){ resetIntro(); }
-            label1.setText("Time Remaining: "+game.voteTimer.getTimeRemaining());
+            label1.setText("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
         }
 
-        else if (game.getPhase() == VOTE_RESULTS_PHASE){
+        else if (game.gameStateManager.getPhase() == VOTE_RESULTS_PHASE){
             showResults();
         }
     }
