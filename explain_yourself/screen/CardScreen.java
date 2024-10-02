@@ -190,7 +190,7 @@ public class CardScreen extends BasicScreen {
 
         else if (resultsAnimationStep == 0){
             resultsAnimationStep++;
-            animationTimer.interpolate(0, 1000);
+            animationTimer.interpolate(0, 2000);
             winnerLbl.setVisible(votes1 != votes2);
             winnerLbl.setLocation(
                 votes1 > votes2 ? card1.getX()-winnerLbl.getWidth() : card2.getX()+card2.getWidth(),
