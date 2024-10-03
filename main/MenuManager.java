@@ -101,7 +101,13 @@ public class MenuManager extends JPanel {
                 try {
                     new ExplainGame(window);
                 } catch (IOException e1) {
-                    //TODO Show popup: failed to start server
+                    window.setScene(MenuManager.this);
+
+                    Component errorMsg = new ErrorMessage(e1.getMessage());
+                    errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
+                    add(errorMsg);
+
+
                     e1.printStackTrace();
                 }
             }
