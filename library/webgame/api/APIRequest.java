@@ -114,6 +114,7 @@ public abstract class APIRequest implements HttpHandler {
     }
 
     public static void send303Redirect(HttpExchange exchange, String newUrl) throws IOException {
+        exchange.getResponseHeaders().add("Location",newUrl);
         sendResponse(exchange, 303, newUrl);
     }
 
