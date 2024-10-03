@@ -27,7 +27,7 @@ public class JoinRequest extends APIRequest {
         //Player is already authenticated
         if ( validate(exchange) != -1 ) {
             game.playerManager.setPlayerPhase(getPlayerId(exchange), JOIN_PHASE);
-            sendResponse(exchange, 200, GAME_PAGE);
+            send303Redirect(exchange, "/game");
             return;
         }
 
@@ -45,7 +45,7 @@ public class JoinRequest extends APIRequest {
         String playerName = game.playerManager.addPlayer( nameBody.group( 1 ) );
         exchange.getResponseHeaders().add( "Set-Cookie", "name="+playerName+"; HttpOnly" );
         exchange.getResponseHeaders().add( "Set-Cookie", "session="+game.GAME_ID+"; HttpOnly" );
-        sendResponse(exchange, 200, GAME_PAGE);
+        send303Redirect(exchange, "/game");
     }
     
 }
