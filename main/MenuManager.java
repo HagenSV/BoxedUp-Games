@@ -94,7 +94,7 @@ public class MenuManager extends JPanel {
         title2.setBounds(0,0,100,30);
         add(title2);
 
-        JButton explainButton = new MenuButton("Explain Yourself!",0);
+        JButton explainButton = new MenuButton("Explain Yourself!");
         explainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,19 +114,19 @@ public class MenuManager extends JPanel {
         });
         add(explainButton);
 
-        JButton gamebtn2 = new MenuButton("Game_2",1);
+        JButton gamebtn2 = new MenuButton("Game_2");
         add(gamebtn2);
 
-        JButton gamebtn3 = new MenuButton("Game_3",2);
+        JButton gamebtn3 = new MenuButton("Game_3");
         add(gamebtn3);
 
-        JButton gamebtn4 = new MenuButton("Game_4",3);
+        JButton gamebtn4 = new MenuButton("Game_4");
         add(gamebtn4);
 
-        JButton gamebtn5 = new MenuButton("Game_5",4);
+        JButton gamebtn5 = new MenuButton("Game_5");
         add(gamebtn5);
 
-        JButton gamebtn6 = new MenuButton("Game_6",5);
+        JButton gamebtn6 = new MenuButton("Game_6");
         add(gamebtn6);
 
         buttons = new JButton[]{ explainButton, gamebtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
