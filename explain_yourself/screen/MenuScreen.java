@@ -1,5 +1,6 @@
 package explain_yourself.screen;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -133,6 +134,8 @@ public class MenuScreen extends BasicScreen {
             game.gameStateManager.start();
             resetPositions();
         }
+
+        g.setColor(Color.black);
 
         g.setFont(FONT.deriveFont(35f));
         g.drawString("Players:",20,300);

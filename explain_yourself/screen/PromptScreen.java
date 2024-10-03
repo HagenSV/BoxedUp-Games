@@ -53,6 +53,7 @@ public class PromptScreen extends BasicScreen {
 
         label1.setText("Time Remaining: "+game.gameData.promptTimer.getTimeRemaining());
 
+        g.setColor(Color.BLACK);
         g.setFont(FONT.deriveFont(35f));
         g.drawString("Submissions:",20,300);
         g.setFont(FONT.deriveFont(20f));
