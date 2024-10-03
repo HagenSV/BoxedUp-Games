@@ -1,8 +1,3 @@
-#11 new prompts (goal 20)
-#GCC Specific
-Campo is knocking on your door
-You are locked in McNulty's basement
-
 #Regular
 You are forced to wear a hat for the rest of your life
 You are a sentient pile of spiders
@@ -37,6 +32,7 @@ You are in Mary Poppins's handbag
 #Dynamic
 You are inside {player}'s dream
 You are being sued by {player}
+You are locked in {player}'s basement
 You were written in as president of {country}
 You are in exile in {country}
 You are trapped in {place}
