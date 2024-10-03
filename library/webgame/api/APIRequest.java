@@ -113,6 +113,10 @@ public abstract class APIRequest implements HttpHandler {
         out.close();   
     }
 
+    public static void send303Redirect(HttpExchange exchange, String newUrl) throws IOException {
+        sendResponse(exchange, 303, newUrl);
+    }
+
 
     public static void send400BadRequest(HttpExchange exchange) throws IOException {
         sendResponse(exchange, 400, "BadRequest");
