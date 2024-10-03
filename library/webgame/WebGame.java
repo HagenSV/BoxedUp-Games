@@ -3,6 +3,8 @@ package library.webgame;
 import library.Server;
 import java.io.IOException;
 
+import java.net.InetAddress;
+
 public class WebGame {
 
     public final String GAME_ID;
@@ -16,6 +18,10 @@ public class WebGame {
 
     public WebGame(PlayerManager pm, GameStateManager gsm, ServerViewManager svm) throws IOException {
         GAME_ID = ""+(int)(Math.random()*1_000_000);
+
+        if (InetAddress.getLocalHost().equals(InetAddress.getLoopbackAddress())){
+            throw new IOException("Not connected to network");
+        }
 
         playerManager = pm;
         gameStateManager = gsm;
