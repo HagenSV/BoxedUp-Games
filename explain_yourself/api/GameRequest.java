@@ -11,7 +11,7 @@ import library.webgame.api.APIRequest;
 
 public class GameRequest extends APIRequest {
 
-    public static final String PATH = "/game";
+    public static final String PATH = "/game1";
 
     public GameRequest(WebGame game){
         super(PATH, game);
