@@ -21,6 +21,7 @@ public class VoteRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
 
         String body = getBody(exchange);
         int playerId = validate(exchange);

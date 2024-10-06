@@ -20,6 +20,7 @@ public class JoinRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
 
         String body = getBody(exchange);
         Matcher nameBody = namePattern.matcher(body);

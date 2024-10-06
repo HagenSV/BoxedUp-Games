@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.sun.net.httpserver.HttpExchange;
 
 import explain_yourself.ExplainGameData;
+import library.OutputLog;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
@@ -22,6 +23,7 @@ public class CardDataRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
         if (validate(exchange) == -1 || game.gameStateManager.getPhase() != VOTE_PHASE ) {
             send401AccessDenied(exchange);
             return;
@@ -32,7 +34,7 @@ public class CardDataRequest extends APIRequest {
 
         String data = String.format( "%s\n%s\n%s", prompt, responses[0], responses[1] );
 
-        System.out.println(data);
+        OutputLog.getInstance().log(data);
 
         sendResponse( exchange, 200, data );
     }

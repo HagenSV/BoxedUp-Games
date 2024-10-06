@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import library.OutputLog;
 import library.webgame.WebGame;
 
 public abstract class APIRequest implements HttpHandler {
@@ -82,7 +83,6 @@ public abstract class APIRequest implements HttpHandler {
     }
 
     public static String getBody(HttpExchange exchange){
-        System.out.println(exchange.getRequestMethod());
         try {
             //Get request body
             InputStream in = exchange.getRequestBody();
@@ -93,6 +93,43 @@ public abstract class APIRequest implements HttpHandler {
         } catch (IOException e){
             return null;
         }
+    }
+
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+        String method = exchange.getRequestMethod();
+        String sessionId = getSessionId(exchange);
+        String playerName = getPlayerName(exchange);
+        String path = exchange.getRequestURI().toString();
+        String body = getBody(exchange);
+        
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("session[");
+        if (!sessionId.isEmpty()){
+            sb.append("id=");
+            sb.append(sessionId);
+        }
+        if (!playerName.isEmpty()){
+            if (!sessionId.isEmpty()){
+                sb.append(";");
+            }
+            sb.append("name=");
+            sb.append(playerName);
+        }
+
+        sb.append("] ");
+        sb.append(method);
+        sb.append(" ");
+        sb.append(path);
+
+        if (method.equals("POST")){
+            sb.append(" ");
+            sb.append(body);
+        }
+
+        OutputLog.getInstance().log(sb.toString());
+
     }
 
     public static void sendResponse( HttpExchange exchange, int rCode, String s ) throws IOException {

@@ -15,6 +15,7 @@ public class PlayerListRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
         sendResponse(exchange, 200, game.playerManager.getPlayers().toString().replaceAll("\\[|\\]", "") );
 
     }

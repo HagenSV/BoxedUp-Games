@@ -23,6 +23,7 @@ public class SubmitRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
 
         String data = getBody(exchange);
         int playerId = validate(exchange);

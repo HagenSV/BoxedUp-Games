@@ -22,6 +22,7 @@ public class RootRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        super.handle(exchange);
         String path = exchange.getRequestURI().getPath().substring(1);
 
         if (path.isEmpty()){ path = "index.html"; }
