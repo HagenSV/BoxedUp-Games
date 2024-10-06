@@ -30,6 +30,8 @@ public class Server {
         ThreadPoolExecutor threadPool = (ThreadPoolExecutor)Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         server.setExecutor(threadPool);
         server.start();
+
+        OutputLog.getInstance().log("Http Server Started");
     }
 
     public void createContext(String path, HttpHandler handler){
@@ -38,6 +40,7 @@ public class Server {
 
     public void close(){
         server.stop(0);
+        OutputLog.getInstance().log("Http Server Closed");
     }
 
     public static void generateQR(String options) throws IOException, UnknownHostException, URISyntaxException {
