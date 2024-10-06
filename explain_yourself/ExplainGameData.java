@@ -131,6 +131,7 @@ public class ExplainGameData {
 
     public void nextCard(){
         cardIndex += 1;
+        clearAllVotes();
     }
 
 
