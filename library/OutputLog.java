@@ -59,7 +59,14 @@ public class OutputLog {
             int minute = c.get(Calendar.MINUTE);
             int second = c.get(Calendar.SECOND);
 
-            writer.append(String.format("[%d:%d:%d] %s\n",hour,minute,second,message));
+            writer.append("[");
+            writer.append(hour < 10 ? "0"+hour : ""+hour);
+            writer.append(minute < 10 ? "0"+minute : ""+minute);
+            writer.append(second < 10 ? "0"+second : ""+second);
+
+            writer.append("] ");
+            writer.append(message);
+            writer.append("\n");
 
         } catch (IOException e){
             e.printStackTrace();
