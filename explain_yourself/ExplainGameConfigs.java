@@ -6,7 +6,7 @@ public class ExplainGameConfigs {
     public static final boolean DEBUG_MODE = true;
 
     public static final int PROMPT_TIME =   ( int )( 3*60 );
-    public static final int VOTE_TIME =     ( int )( 10 );
+    public static final int VOTE_TIME =     ( int )( 30 );
 
     public static final int MIN_PLAYERS = 2;
     public static final int MAX_PLAYERS = 12;
