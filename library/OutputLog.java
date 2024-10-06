@@ -1,6 +1,7 @@
 package library;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -22,14 +23,14 @@ public class OutputLog {
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        String fileName = String.format("log-%d-%d-%d", year,month,day);
+        String fileName = String.format("output-%d-%d-%d", year,month,day);
 
-        log = new File(fileName);
+        log = new File(log_dir,fileName+".log");
         int add = 0;
 
         while (log.exists()){
             add += 1;
-            log = new File(fileName+"-"+add);
+            log = new File(log_dir,fileName+"-"+add+".log");
         }
 
 
@@ -50,7 +51,7 @@ public class OutputLog {
 
 
     public void log(String message){
-        try (PrintWriter writer = new PrintWriter(log)) {
+        try (FileWriter writer = new FileWriter(log, true)) {
 
             Calendar c = Calendar.getInstance();
 
@@ -58,7 +59,7 @@ public class OutputLog {
             int minute = c.get(Calendar.MINUTE);
             int second = c.get(Calendar.SECOND);
 
-            writer.println(String.format("[%d:%d:%d] %s",hour,minute,second,message));
+            writer.append(String.format("[%d:%d:%d] %s\n",hour,minute,second,message));
 
         } catch (IOException e){
             e.printStackTrace();
