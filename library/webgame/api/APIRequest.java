@@ -52,7 +52,7 @@ public abstract class APIRequest implements HttpHandler {
         Matcher nameCookie = namePattern.matcher( cookies );
 
         //Player info
-        return nameCookie.find() ? nameCookie.group(1) : null;
+        return nameCookie.find() ? nameCookie.group(1) : "";
     }
 
     public int getPlayerId(HttpExchange exchange){
