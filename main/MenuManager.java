@@ -80,7 +80,7 @@ public class MenuManager extends JPanel {
             }
         });
 
-        window = new Window("BoxedUp Games!");
+        window = new Window("BoxedUp Games");
         window.setIconImage(new ImageIcon("assets/logo.png").getImage());
         window.setScene(this);
         window.setVisible(true);
