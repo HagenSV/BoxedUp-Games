@@ -17,7 +17,7 @@
     <div id="contents" class="center-text">
     <form action="/join" method="POST" onsubmit="return validate();">
         <label for="name">Enter your name: </label>
-        <input type="text" required id="name" name="name" oninput="onType()">
+        <input type="text" required id="name" name="name" oninput="onType()" onpaste="onType()">
         <input type="submit" value="Join!">
     </form>
     <script>
@@ -35,8 +35,8 @@
 
         function onType() {
             const MAX_LEN = 30;
-            const input = document.getElementById("response");
-            input.value = input.value.replaceAll("\n","")
+            const input = document.getElementById("name");
+            input.value = input.value.replace(/[^\w\d!@#$%^&*()\-=_+[\]{}|\\"':;?/.,<>]/gm,"")
             len = input.value.length;
             input.value = input.value.substring(0,Math.min(len,MAX_LEN));
         }
