@@ -105,7 +105,7 @@ public class MenuManager extends JPanel {
                 } catch (IOException e1) {
                     window.setScene(MenuManager.this);
 
-                    Component errorMsg = new ErrorMessage(e1.getMessage());
+                    Component errorMsg = new PopUpMessage(e1.getMessage());
                     errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
                     add(errorMsg);
 
@@ -117,18 +117,23 @@ public class MenuManager extends JPanel {
         add(explainButton);
 
         JButton gamebtn2 = new MenuButton("Game_2");
+        gamebtn2.addActionListener(new ComingSoonPopUp());
         add(gamebtn2);
 
         JButton gamebtn3 = new MenuButton("Game_3");
+        gamebtn3.addActionListener(new ComingSoonPopUp());
         add(gamebtn3);
 
         JButton gamebtn4 = new MenuButton("Game_4");
+        gamebtn4.addActionListener(new ComingSoonPopUp());
         add(gamebtn4);
 
         JButton gamebtn5 = new MenuButton("Game_5");
+        gamebtn5.addActionListener(new ComingSoonPopUp());
         add(gamebtn5);
 
         JButton gamebtn6 = new MenuButton("Game_6");
+        gamebtn6.addActionListener(new ComingSoonPopUp());
         add(gamebtn6);
 
         buttons = new JButton[]{ explainButton, gamebtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
@@ -184,5 +189,16 @@ public class MenuManager extends JPanel {
         public void mouseExited(MouseEvent e) {
             deselectButton();
         }
+    }
+
+    private class ComingSoonPopUp implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Component errorMsg = new PopUpMessage("Coming Soon!");
+            errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
+            add(errorMsg);
+        }
+        
     }
 }
