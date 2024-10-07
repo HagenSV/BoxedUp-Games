@@ -44,6 +44,8 @@ public abstract class PlayerManager {
             for ( int i = 1; i < MAX_PLAYERS; i++ ) {
                 if ( !playerList.contains( playerName+" "+i ) ) {
                     playerList.add( playerName+" "+i );
+                    playerPhase.add( 0 );
+
                     return playerName+" "+i;
                 }
             }
