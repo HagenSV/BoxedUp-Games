@@ -29,9 +29,11 @@ public class CardScreen extends BasicScreen {
     private JLabel promptLabel;
     private DynamicValue promptOffset;
 
+    private JLabel name1;
     private JTextPane card1;
     private DynamicValue card1Offset;
 
+    private JLabel name2;
     private JTextPane card2;
     private DynamicValue card2Offset;
 
@@ -66,12 +68,23 @@ public class CardScreen extends BasicScreen {
 
         card1 = new Card();
         card1.setLocation(getWidth()/2-card1.getWidth()-50,promptLabel.getY()+promptLabel.getHeight()+50);
+        add(card1);
+
+        name1 = new DefaultLabel("",JLabel.CENTER);
+        name1.setFont(FONT.deriveFont(30f));
+        name1.setSize(400,30);
+        name1.setLocation(card1.getX(),card1.getY()-name1.getHeight());
+        add(name1);
 
         card2 = new Card();
         card2.setLocation(getWidth()/2+50,promptLabel.getY()+promptLabel.getHeight()+50);
-        
         add(card2);
-        add(card1);
+
+        name2 = new DefaultLabel("",JLabel.CENTER);
+        name2.setFont(FONT.deriveFont(30f));
+        name2.setSize(400,30);
+        name2.setLocation(card2.getX(),card2.getY()-name2.getHeight());
+        add(name2);
 
         votes1Lbl = new DefaultLabel("99");
         votes1Lbl.setFont(FONT.deriveFont(30f));
@@ -105,11 +118,27 @@ public class CardScreen extends BasicScreen {
         if (animationTimer.isInterpolating()){ return; }
 
         if (introAnimationStep == -1){
+
+            ExplainGameData data = game.gameData;
+            int promptId = data.getCardIndex();
+            if (promptId == -1 || promptId >= game.playerManager.getPlayerCount()){ return; }
+
+            String[] responses = data.getPromptResponses(promptId, "No Response");
+            int[] responders = data.getPromptResponders(promptId);
+
+            promptLabel.setText( data.getPrompt(promptId) );
+            card1.setText(responses[0]);
+            name1.setText(game.playerManager.getPlayers().get(responders[0]));
+            card2.setText(responses[1]);
+            name2.setText(game.playerManager.getPlayers().get(responders[1]));
+
             introAnimationStep = 0;
             animationTimer.interpolate(0, 1000);
             promptOffset.setValue(promptLabel.getHeight()/2+card1.getHeight()/2+50);
             card1.setVisible(false);
             card2.setVisible(false);
+            name1.setVisible(false);
+            name2.setVisible(false);
             label1.setVisible(false);
             label2.setVisible(false);
             votes1Lbl.setVisible(false);
@@ -178,6 +207,10 @@ public class CardScreen extends BasicScreen {
         if (resultsAnimationStep == -1){
             resultsAnimationStep++;
             animationTimer.interpolate(0, 1000);
+
+            name1.setVisible(true);
+            name2.setVisible(true);
+
             label1.setVisible(false);
             label2.setVisible(false);
 
@@ -219,20 +252,11 @@ public class CardScreen extends BasicScreen {
         label2.setLocation(getWidth()/2-label2.getWidth()/2,getHeight()-label2.getHeight()-50);
         card1.setLocation(getWidth()/2+card1Offset.getValue(),promptLabel.getY()+promptLabel.getHeight()+50);
         card2.setLocation(getWidth()/2+card2Offset.getValue(),promptLabel.getY()+promptLabel.getHeight()+50);
+        name1.setLocation(card1.getX(),card1.getY()-name1.getHeight());
+        name2.setLocation(card2.getX(),card2.getY()-name2.getHeight());
 
         votes1Lbl.setLocation(card1.getX()-votes1Lbl.getWidth()-20,card1.getY()+card1.getHeight()/2-votes1Lbl.getWidth()/2);
         votes2Lbl.setLocation(card2.getX()+card2.getWidth()+20,card2.getY()+card2.getHeight()/2-votes2Lbl.getWidth()/2);
-
-
-        int cardIndex = game.gameData.getCardIndex();
-        if (cardIndex == -1 || cardIndex >= game.playerManager.getPlayerCount()){ return; }
-
-        ExplainGameData data = game.gameData;
-        String[] responses = data.getPromptResponses(cardIndex, "No Response");
-
-        promptLabel.setText( data.getPrompt(cardIndex) );
-        card1.setText(responses[0]);
-        card2.setText(responses[1]);
 
         if (game.gameStateManager.getPhase() == CARD_INTRO_PHASE){
             introCards();
