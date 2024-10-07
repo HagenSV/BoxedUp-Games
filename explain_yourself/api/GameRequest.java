@@ -19,7 +19,6 @@ public class GameRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
         
         // If player is not logged in, send them to the login page
         if (validate(exchange) == -1){

@@ -23,7 +23,6 @@ public class CardDataRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
         if (validate(exchange) == -1 || game.gameStateManager.getPhase() != VOTE_PHASE ) {
             send401AccessDenied(exchange);
             return;

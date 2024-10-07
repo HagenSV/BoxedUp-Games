@@ -95,13 +95,11 @@ public abstract class APIRequest implements HttpHandler {
         }
     }
 
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
+    public String getInfo(HttpExchange exchange){
         String method = exchange.getRequestMethod();
         String sessionId = getSessionId(exchange);
         String playerName = getPlayerName(exchange);
         String path = exchange.getRequestURI().toString();
-        String body = getBody(exchange);
         
         StringBuilder sb = new StringBuilder();
 
@@ -123,13 +121,7 @@ public abstract class APIRequest implements HttpHandler {
         sb.append(" ");
         sb.append(path);
 
-        if (method.equals("POST")){
-            sb.append(" ");
-            sb.append(body);
-        }
-
-        OutputLog.getInstance().log(sb.toString());
-
+        return sb.toString();
     }
 
     public static void sendResponse( HttpExchange exchange, int rCode, String s ) throws IOException {

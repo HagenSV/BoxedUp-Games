@@ -22,7 +22,6 @@ public class PromptRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
         int playerId = validate(exchange);
 
         if (playerId == -1 || game.gameStateManager.getPhase() != PROMPT_PHASE ){

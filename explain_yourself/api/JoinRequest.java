@@ -1,10 +1,12 @@
 package explain_yourself.api;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.regex.Matcher;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import library.OutputLog;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
@@ -20,7 +22,6 @@ public class JoinRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
 
         String body = getBody(exchange);
         Matcher nameBody = namePattern.matcher(body);
@@ -33,6 +34,7 @@ public class JoinRequest extends APIRequest {
         }
 
         if ( !nameBody.find() ) {
+            OutputLog.getInstance().log(getInfo(exchange)+" Bad Request: "+body);
             send400BadRequest(exchange);
             return;
         }
@@ -43,6 +45,7 @@ public class JoinRequest extends APIRequest {
         }
 
         //Only add player to game if their session id does not exist and does not equal the current session id
+        OutputLog.getInstance().log(getInfo(exchange)+" "+body);
         String playerName = game.playerManager.addPlayer( nameBody.group( 1 ) );
         exchange.getResponseHeaders().add( "Set-Cookie", "name="+playerName+"; HttpOnly" );
         exchange.getResponseHeaders().add( "Set-Cookie", "session="+game.GAME_ID+"; HttpOnly" );

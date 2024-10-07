@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.sun.net.httpserver.HttpExchange;
 
 import explain_yourself.ExplainGameData;
+import library.OutputLog;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
@@ -23,8 +24,6 @@ public class SubmitRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
-
         String data = getBody(exchange);
         int playerId = validate(exchange);
 
@@ -34,9 +33,13 @@ public class SubmitRequest extends APIRequest {
         }
 
         if (data == null){
+            OutputLog.getInstance().log(getInfo(exchange)+" Error: Missing body");
             send400BadRequest(exchange);
             return;
         }
+
+        OutputLog.getInstance().log(getInfo(exchange)+" data["+data+"]");
+
 
         String response = data.split("=")[1];
 

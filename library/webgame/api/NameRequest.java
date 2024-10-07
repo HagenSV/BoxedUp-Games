@@ -16,7 +16,6 @@ public class NameRequest extends APIRequest {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        super.handle(exchange);
 
         if (validate(exchange) == -1){
             send401AccessDenied(exchange);
