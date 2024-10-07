@@ -1,6 +1,8 @@
 package explain_yourself.api;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -45,10 +47,18 @@ public class JoinRequest extends APIRequest {
 
         //Only add player to game if their session id does not exist and does not equal the current session id
         OutputLog.getInstance().log(getInfo(exchange)+" "+body);
-        String playerName = game.playerManager.addPlayer( nameBody.group( 1 ) );
-        exchange.getResponseHeaders().add( "Set-Cookie", "name="+playerName+"; HttpOnly" );
-        exchange.getResponseHeaders().add( "Set-Cookie", "session="+game.GAME_ID+"; HttpOnly" );
-        send303Redirect(exchange, GameRequest.PATH);
+        String inputName = nameBody.group(1);
+
+        try {
+            String result = java.net.URLDecoder.decode(inputName, StandardCharsets.UTF_8.name());
+            String playerName = game.playerManager.addPlayer( result );
+            exchange.getResponseHeaders().add( "Set-Cookie", "name="+playerName+"; HttpOnly" );
+            exchange.getResponseHeaders().add( "Set-Cookie", "session="+game.GAME_ID+"; HttpOnly" );
+            send303Redirect(exchange, GameRequest.PATH);
+
+        } catch (UnsupportedEncodingException e) {
+            OutputLog.getInstance().log("Failed to decode name string");
+        }
     }
     
 }
