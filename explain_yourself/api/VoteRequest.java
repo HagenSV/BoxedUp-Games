@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.sun.net.httpserver.HttpExchange;
 
 import explain_yourself.ExplainGameData;
+import library.OutputLog;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
@@ -40,6 +41,14 @@ public class VoteRequest extends APIRequest {
         } else if (answer.equals("2")){
             gameData.vote(playerId,gameData.getCardIndex(),1);
         }
+
+        OutputLog.getInstance().log(getInfo(exchange)+" body["+body+",len="+body.length()+"]");
+        OutputLog.getInstance().log(
+            String.format("Votes: [%d,%d]",
+                gameData.getVotes(gameData.getCardIndex(), 0),
+                gameData.getVotes(gameData.getCardIndex(), 1)
+            )
+        );
 
         sendResponse( exchange, 200, "Success" );
 

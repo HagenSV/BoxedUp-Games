@@ -38,14 +38,9 @@ public class SubmitRequest extends APIRequest {
             return;
         }
 
-        OutputLog.getInstance().log(getInfo(exchange)+" data["+data+"]");
-
+        OutputLog.getInstance().log(getInfo(exchange)+" body["+data+",len="+data.length()+"]");
 
         String response = data.split("=")[1];
-
-        for (char c : response.toCharArray()){
-            System.out.println(c+" "+(int)c);
-        }
 
         //Replace BROKEN IOS CHARACTERS, I HATE YOU APPLE
         response = response.replace((char)8217,'\'');
