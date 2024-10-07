@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -80,6 +81,7 @@ public class MenuManager extends JPanel {
         });
 
         window = new Window("BoxedUp Games!");
+        window.setIconImage(new ImageIcon("assets/logo.jpg").getImage());
         window.setScene(this);
         window.setVisible(true);
 
