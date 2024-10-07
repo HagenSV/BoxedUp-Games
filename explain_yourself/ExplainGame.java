@@ -32,7 +32,7 @@ public class ExplainGame {
     public ExplainGame(Window w) throws IOException {
         gameData = new ExplainGameData(this);
 
-        playerManager = new ExplainGamePM(MIN_PLAYERS, MAX_PLAYERS);
+        playerManager = new ExplainGamePM(MIN_PLAYERS, MAX_PLAYERS,gameData);
         gameStateManager = new ExplainGameSM(gameData);
         serverViewManager = new ExplainGameVM(w,this);
 
