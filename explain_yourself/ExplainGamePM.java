@@ -11,8 +11,11 @@ import java.io.IOException;
 
 public class ExplainGamePM extends PlayerManager {
 
-    public ExplainGamePM(int minPlayers, int maxPlayers){
+    private final ExplainGameData gameData;
+
+    public ExplainGamePM(int minPlayers, int maxPlayers, ExplainGameData gameData){
        super(minPlayers,maxPlayers);
+       this.gameData = gameData;
     }
 
     @Override
@@ -40,8 +43,12 @@ public class ExplainGamePM extends PlayerManager {
                 break;
 
             case VOTE_PHASE:
+                int[] responders = gameData.getPromptResponders(gameData.getCardIndex());
                 if ( playerPhase == WAIT_PHASE ) { APIRequest.sendResponse( exchange, 200, WAIT_SCREEN); }
-                else {
+                else if (playerId == responders[0] || playerId == responders[1]) {
+                    APIRequest.sendResponse( exchange, 200, WAIT_SCREEN );
+                    game.playerManager.setPlayerPhase( playerId, WAIT_PHASE );
+                } else {
                     APIRequest.sendResponse( exchange, 200, CARD_CHOOSER );
                     game.playerManager.setPlayerPhase( playerId, VOTE_PHASE );
                 }
