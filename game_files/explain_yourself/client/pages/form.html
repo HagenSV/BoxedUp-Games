@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <title>BoxedJack Games</title>
+    <link rel="stylesheet" href="https://use.typekit.net/vfj8mow.css">
     <link rel="stylesheet" href="/styles.css">
-    <script src="cookie_manager.js"></script>
-    <script src="game_controller.js"></script>
 </head>
 <body>
     <div class="header">
@@ -59,7 +58,7 @@
             function onType() {
                 const MAX_LEN = 300;
                 const input = document.getElementById("response");
-                input.value = input.value.replaceAll("\n","")
+                input.value = input.value.replace(/[^\w\d!@#$%^&*()\-=_+[\]{}|\\"':;?/.,<>]/gm,"")
                 len = input.value.length;
                 input.value = input.value.substring(0,Math.min(len,MAX_LEN));
             }
