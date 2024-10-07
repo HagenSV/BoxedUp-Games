@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import library.OutputLog;
 import library.webgame.WebGame;
 
 public abstract class APIRequest implements HttpHandler {
