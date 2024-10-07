@@ -98,6 +98,30 @@ public class ExplainGameData {
         return playerPrompts[playerId][promptNum];
     }
 
+    /**
+     * Get the players who responded to a particular prompt
+     * @param promptId
+     * @return and array containing the players' ids
+     */
+    public int[] getPromptResponders(int promptId){
+        int[] responders = new int[PROMPTS_PER_PLAYER];
+
+        for (int i = 0; i < PLAYER_COUNT; i++){
+            for (int j = 0; j < PROMPTS_PER_PLAYER; j++){
+                if (playerPrompts[i][j] == promptId){
+                    responders[j] = i;
+                }
+            }
+        }
+
+        return responders;
+    }
+
+    /**
+     * Generates an array of responses to a particular prompt
+     * @param promptId the id of the prompt
+     * @return an array of responses
+     */
     public String[] getPromptResponses(int promptId){
         return getPromptResponses(promptId, null);
     }
