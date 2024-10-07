@@ -188,7 +188,7 @@ public class ExplainGameData {
         votes[promptId][choice]++;
         
         //Remove previous vote if necessary
-        if (previousVote[playerId] == -1){
+        if (previousVote[playerId] != -1){
             votes[promptId][previousVote[playerId]]--;
         }
 
