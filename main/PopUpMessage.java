@@ -10,11 +10,11 @@ import javax.swing.*;
 import library.graphics.BlankButton;
 import library.graphics.CenteredTextPane;
 
-public class ErrorMessage extends CenteredTextPane {
+public class PopUpMessage extends CenteredTextPane {
 
     private JButton exitBtn;
     
-    public ErrorMessage(String message){
+    public PopUpMessage(String message){
         setBackground(new Color(1, 1, 1, 0.5f));
         setForeground(Color.BLACK);
 
@@ -35,7 +35,7 @@ public class ErrorMessage extends CenteredTextPane {
             public void actionPerformed(ActionEvent e) {
                 Container parent = getParent();
                 if (parent == null){ return; }
-                parent.remove(ErrorMessage.this);
+                parent.remove(PopUpMessage.this);
             }
             
         });
