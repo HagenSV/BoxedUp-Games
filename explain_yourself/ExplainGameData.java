@@ -35,7 +35,7 @@ public class ExplainGameData {
     private int[] promptsSubmitted;
     
     //If the player has voted for the current card
-    private boolean[] voted;
+    private int[] previousVote;
 
     private int cardIndex;
 
@@ -74,7 +74,7 @@ public class ExplainGameData {
         votes = new int[PLAYER_COUNT][PROMPTS_PER_PLAYER];
 
         promptsSubmitted = new int[PLAYER_COUNT];
-        voted = new boolean[PLAYER_COUNT];
+        previousVote = new int[PLAYER_COUNT];
 
         cardIndex = -1;
 
@@ -164,16 +164,16 @@ public class ExplainGameData {
         votes[promptId][choice]++;
         
         //Remove previous vote if necessary
-        if (voted[playerId]){
-            votes[promptId][choice == 0 ? 1 : 0]--;
+        if (previousVote[playerId] == -1){
+            votes[promptId][previousVote[playerId]]--;
         }
 
-        voted[playerId] = true;
+        previousVote[playerId] = choice;
     }
 
     public void clearAllVotes(){
-        for (int i = 0; i < voted.length; i++){
-            voted[i] = false;
+        for (int i = 0; i < PLAYER_COUNT; i++){
+            previousVote[i] = -1;
         }
     }
 
