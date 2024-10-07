@@ -43,7 +43,7 @@ public class SubmitRequest extends APIRequest {
         String response = data.substring(9,data.length());
 
         //Validate input server-side because you should never trust users
-        response = response.replaceAll("[^\\w\\d!@#$%^&*()\\-=_+\\[\\]\\{}|\\\\\"':;?/.,<>]","");
+        response = response.replaceAll("[^\\w\\d!@#$%^&*()\\-=_+\\[\\]\\{}|\\\\\"':;?/.,<> ]","");
 
         sendResponse(exchange, (gameData.getResponseCount(playerId) == 0) ? 200 : 208, "Recieved");
         gameData.storeResponse(playerId, gameData.getResponseCount(playerId), response);

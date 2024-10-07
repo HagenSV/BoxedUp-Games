@@ -58,7 +58,7 @@
             function onType() {
                 const MAX_LEN = 300;
                 const input = document.getElementById("response");
-                input.value = input.value.replace(/[^\w\d!@#$%^&*()\-=_+[\]{}|\\"':;?/.,<>]/gm,"")
+                input.value = input.value.replace(/[^\w\d!@#$%^&*()\-=_+[\]{}|\\"':;?/.,<> ]/gm,"")
                 len = input.value.length;
                 input.value = input.value.substring(0,Math.min(len,MAX_LEN));
             }
