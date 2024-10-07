@@ -1,2 +1,4 @@
-*.png
+title.png
+qrcode.png
 logs/*
+assets/audio/*
