@@ -61,8 +61,8 @@ public class OutputLog {
 
             writer.append("[");
             writer.append(hour < 10 ? "0"+hour : ""+hour);
-            writer.append(minute < 10 ? "0"+minute : ""+minute);
-            writer.append(second < 10 ? "0"+second : ""+second);
+            writer.append(minute < 10 ? ":0"+minute : ":"+minute);
+            writer.append(second < 10 ? ":0"+second : ":"+second);
 
             writer.append("] ");
             writer.append(message);
