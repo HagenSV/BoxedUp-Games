@@ -40,33 +40,28 @@ public class SubmitRequest extends APIRequest {
 
         OutputLog.getInstance().log(getInfo(exchange)+" body["+data+",len="+data.length()+"]");
 
-        String response = data.substring(8,data.length());
+        String response = data.substring(9,data.length());
 
-        response = response.replaceAll("[^\\w\\d!@#$%^&*()\\-=_+[\\]{}|\\\\\"':;?/.,<>]","");
-
-        //Replace BROKEN IOS CHARACTERS, I HATE YOU APPLE
-        //response = response.replace((char)8216,(char)39);
-        //response = response.replace((char)8217,(char)39);
-        //response = response.replace((char)8220,(char)34);
-
+        //Validate input server-side because you should never trust users
+        response = response.replaceAll("[^\\w\\d!@#$%^&*()\\-=_+\\[\\]\\{}|\\\\\"':;?/.,<>]","");
 
         sendResponse(exchange, (gameData.getResponseCount(playerId) == 0) ? 200 : 208, "Recieved");
         gameData.storeResponse(playerId, gameData.getResponseCount(playerId), response);
 
         if (gameData.getResponseCount(playerId) == 2){
             game.playerManager.setPlayerPhase(playerId, WAIT_PHASE);
-        }
 
-        //Continue to next phase if all players have submitted their responses
-        boolean advancePhase = true;
-        for ( int i = 0; i < game.playerManager.getPlayerCount(); i++ ){
-            if (gameData.getResponseCount(i) < 2){
-                advancePhase = false;
-                break;
+            //Continue to next phase if all other players have submitted both responses
+            boolean advancePhase = true;
+            for ( int i = 0; i < game.playerManager.getPlayerCount(); i++ ){
+                if (gameData.getResponseCount(i) < 2){
+                    advancePhase = false;
+                    break;
+                }
             }
-        }
-        if (advancePhase){ 
-            game.gameStateManager.setPhase(CARD_INTRO_PHASE);
+            if (advancePhase){ 
+                game.gameStateManager.setPhase(CARD_INTRO_PHASE);
+            }
         }
     }
     
