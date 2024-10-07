@@ -1,7 +1,6 @@
 package explain_yourself.api;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.regex.Matcher;
 
 import com.sun.net.httpserver.HttpExchange;
