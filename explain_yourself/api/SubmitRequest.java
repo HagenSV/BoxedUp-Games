@@ -40,11 +40,15 @@ public class SubmitRequest extends APIRequest {
 
         OutputLog.getInstance().log(getInfo(exchange)+" body["+data+",len="+data.length()+"]");
 
-        String response = data.split("=")[1];
+        String response = data.substring(8,data.length());
+
+        response = response.replaceAll("[^\\w\\d!@#$%^&*()\\-=_+[\\]{}|\\\\\"':;?/.,<>]","");
 
         //Replace BROKEN IOS CHARACTERS, I HATE YOU APPLE
-        response = response.replace((char)8217,'\'');
-        response = response.replace((char)8216,'\'');
+        //response = response.replace((char)8216,(char)39);
+        //response = response.replace((char)8217,(char)39);
+        //response = response.replace((char)8220,(char)34);
+
 
         sendResponse(exchange, (gameData.getResponseCount(playerId) == 0) ? 200 : 208, "Recieved");
         gameData.storeResponse(playerId, gameData.getResponseCount(playerId), response);
