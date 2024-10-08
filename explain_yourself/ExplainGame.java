@@ -15,9 +15,9 @@ import library.webgame.GameStateManager;
 import library.webgame.PlayerManager;
 import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
+import library.webgame.api.CommonRequest;
 import library.webgame.api.NameRequest;
 import library.webgame.api.PlayerListRequest;
-import library.webgame.api.RootRequest;
 import library.webgame.api.ViewRequest;
 
 public class ExplainGame {
@@ -38,7 +38,7 @@ public class ExplainGame {
 
         game = new WebGame(playerManager,gameStateManager,serverViewManager);
 
-        new RootRequest(game, DIRECTORY);
+        new CommonRequest(game);
         new PlayerListRequest(game);
         new ViewRequest(game);
         new NameRequest(game);

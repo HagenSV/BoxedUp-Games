@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login Page for Game">
+
+    <title>BoxedJack Games</title>
+    <link rel="stylesheet" href="/common/styles.css">
+</head>
+<body>
+    <div class="header center-text">
+        <h2>BoxedJack Games</h2>
+        <p><i>Like jackbox, but limited to the local network</i></p>
+    </div>
+    <div id="contents" class="center-text">
+    <form action="/join" method="POST" onsubmit="return validate();">
+        <label for="name">Enter your name: </label>
+        <input type="text" required id="name" name="name" oninput="onType()" onpaste="onType()">
+        <input type="submit" value="Join!">
+    </form>
+    <script>
+        function validate(){
+            const nameInput = document.getElementById("name");
+            nameInput.value = nameInput.value.trim();
+            const name = nameInput.value;
+            if (name.length === 0){
+                nameInput.value = "";
+                alert("Please enter a valid username");
+                return false;
+            }
+            return true;
+        }
+
+        function onType() {
+            const MAX_LEN = 30;
+            const input = document.getElementById("name");
+            input.value = input.value.replace(/[^\w\d!@#$%^&*()\-=_+[\]{}|\\"':;?/.,<> ]/gm,"")
+            len = input.value.length;
+            input.value = input.value.substring(0,Math.min(len,MAX_LEN));
+        }
+    </script>
+   </div>
+</body>
+</html>

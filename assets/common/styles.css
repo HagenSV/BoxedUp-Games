@@ -1,0 +1,27 @@
+body {
+    font-size: 23px;
+    letter-spacing: 1px;
+    margin: 0px;
+}
+
+
+#contents {
+    margin: 20px;
+}
+
+.header {
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 5px 0px
+}
+
+.header h2 {
+    letter-spacing: 2px;
+    font-size: 50px;
+    margin: 5px 0px
+}
+
+.header p {
+    width: 100%;
+    margin-top: 5px;
+}

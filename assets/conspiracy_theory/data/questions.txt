@@ -1,0 +1,11 @@
+Name a planet
+Name a country
+Name a celebrity
+Name an occupation
+Name a household appliance
+Name a car brand
+Name a plant
+Name a piece of furniture
+Name a historical figure
+Name a time period in history
+Name a city
