@@ -1,5 +1,5 @@
 package explain_yourself;
-import java.io.File;
+
 import java.io.IOException;
 
 import explain_yourself.api.*;
@@ -33,7 +33,7 @@ public class ExplainGame {
 
         new RootRequest(game);
         new CommonRequest(game);
-        new StaticRequest(game,new File("assets/explain_yourself"));
+        new StaticRequest(game,DIRECTORY);
         new PlayerListRequest(game);
         new ViewRequest(game);
         new NameRequest(game);
