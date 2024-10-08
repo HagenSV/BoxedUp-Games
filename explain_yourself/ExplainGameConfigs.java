@@ -11,7 +11,7 @@ public class ExplainGameConfigs {
     public static final int MIN_PLAYERS = 2;
     public static final int MAX_PLAYERS = 12;
     
-    public static final File DIRECTORY = new File("game_files/explain_yourself/client");
+    public static final File DIRECTORY = new File("assets/explain_yourself/client");
     public static final File JOIN_GAME_FORM = new File(DIRECTORY,"index.html");
     public static final File GAME_PAGE = new File(DIRECTORY,"pages/join_game.html");
     public static final File GAME_CLOSED = new File(DIRECTORY,"pages/game_closed.html");
