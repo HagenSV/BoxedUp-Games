@@ -31,6 +31,7 @@ public class ExplainGame {
 
         game = new WebGame(playerManager,gameStateManager,serverViewManager);
 
+        new RootRequest(game);
         new CommonRequest(game);
         new StaticRequest(game,new File("assets/explain_yourself"));
         new PlayerListRequest(game);
