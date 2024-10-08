@@ -38,9 +38,9 @@ You have telepathy
 You are the only minor in your friend group
 You are suspected of being the school mascot
 You fell down the stairs and broke your nose
-You are crazy
 You are in a love triangle
 You are in court for calling your friends short
+You pushed your father downstairs
 You are inside {player}'s dream
 You are being sued by {player}
 You are locked in {player}'s basement
