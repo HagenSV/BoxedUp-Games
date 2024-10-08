@@ -1,12 +1,8 @@
 package explain_yourself;
+import java.io.File;
 import java.io.IOException;
 
-import explain_yourself.api.CardDataRequest;
-import explain_yourself.api.GameRequest;
-import explain_yourself.api.JoinRequest;
-import explain_yourself.api.PromptRequest;
-import explain_yourself.api.SubmitRequest;
-import explain_yourself.api.VoteRequest;
+import explain_yourself.api.*;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
@@ -15,10 +11,7 @@ import library.webgame.GameStateManager;
 import library.webgame.PlayerManager;
 import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
-import library.webgame.api.CommonRequest;
-import library.webgame.api.NameRequest;
-import library.webgame.api.PlayerListRequest;
-import library.webgame.api.ViewRequest;
+import library.webgame.api.*;
 
 public class ExplainGame {
 
@@ -39,6 +32,7 @@ public class ExplainGame {
         game = new WebGame(playerManager,gameStateManager,serverViewManager);
 
         new CommonRequest(game);
+        new StaticRequest(game,new File("assets/explain_yourself"));
         new PlayerListRequest(game);
         new ViewRequest(game);
         new NameRequest(game);
