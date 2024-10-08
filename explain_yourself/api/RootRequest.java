@@ -1,4 +1,4 @@
-package library.webgame.api;
+package explain_yourself.api;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,27 +6,23 @@ import java.io.IOException;
 import com.sun.net.httpserver.HttpExchange;
 
 import library.webgame.WebGame;
+import library.webgame.api.APIRequest;
 
 public class RootRequest extends APIRequest {
 
     public static final String PATH = "/";
 
-    private final File DIRECTORY;
-
-    public RootRequest(WebGame game, File dir) {
+    public RootRequest(WebGame game) {
         super(PATH, game);
-        if (!dir.isDirectory()){ throw new IllegalArgumentException("dir must be a directory!"); }
-        DIRECTORY = dir;
-
     }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        String path = exchange.getRequestURI().getPath().substring(1);
+        if (validate(exchange) != -1){
+            send303Redirect(exchange, "/game1");
+        }
 
-        if (path.isEmpty()){ path = "index.html"; }
-
-        File toSend = new File(DIRECTORY,path);
+        File toSend = new File("assets/common/index.html");
 
         if (!toSend.exists()){
             send404NotFound(exchange);
