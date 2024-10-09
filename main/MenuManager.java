@@ -10,15 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import conspiracy_theory.ConspiracyGame;
-import explain_yourself.ExplainGame;
 import library.graphics.Window;
 import main.menu_button.ConspiracyGameBtn;
 import main.menu_button.ExplainGameBtn;
