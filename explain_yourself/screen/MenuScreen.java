@@ -158,6 +158,8 @@ public class MenuScreen extends BasicScreen {
             30
         );
 
+        startButton.setEnabled(game.canStart());
+
         startButton.setLocation(
             getWidth()/2 - startButton.getWidth()/2,
             getHeight() + buttonOffset.getValue()
