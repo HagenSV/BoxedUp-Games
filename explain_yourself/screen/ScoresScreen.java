@@ -3,9 +3,15 @@ package explain_yourself.screen;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM;
+import explain_yourself.ExplainGameVM.BasicScreen;
+
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
+import library.graphics.Window;
+import library.webgame.ServerViewManager;
+import library.webgame.WebGame;
 
 public class ScoresScreen extends BasicScreen {
 
@@ -18,8 +24,8 @@ public class ScoresScreen extends BasicScreen {
 
     private DynamicValue displayScores;
 
-    public ScoresScreen(ExplainGameVM explainGameVM){
-        super(explainGameVM);
+    public ScoresScreen(Window w, WebGame game, ExplainGameData gameData) {
+        super(w, game, gameData);
 
         initialized = false;
     }
@@ -31,7 +37,7 @@ public class ScoresScreen extends BasicScreen {
         //Get scores
         players = new String[game.playerManager.getPlayerCount()];
         game.playerManager.getPlayers().toArray(players);
-        scores = game.gameData.calcScores();
+        scores = gameData.calcScores();
 
         //Sort scores highest to lowest
         //this algorithm is O(n^2) but that doesnt matter

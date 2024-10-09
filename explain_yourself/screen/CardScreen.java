@@ -14,6 +14,9 @@ import explain_yourself.ExplainGameVM;
 import explain_yourself.ExplainGameVM.BasicScreen;
 import library.DynamicValue;
 import library.graphics.DefaultLabel;
+import library.graphics.Window;
+import library.webgame.ServerViewManager;
+import library.webgame.WebGame;
 
 import static explain_yourself.ExplainGameVM.*;
 
@@ -45,10 +48,10 @@ public class CardScreen extends BasicScreen {
     private DynamicValue revealCard1;
     private DynamicValue revealCard2;
 
-    public CardScreen(ExplainGameVM explainGameVM) {
-        super(explainGameVM);
+    public CardScreen(Window w, ServerViewManager svm, WebGame game, ExplainGameData gameData) {
+        super(w, svm, game, gameData);
         
-        label1 = new DefaultLabel("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
+        label1 = new DefaultLabel("Time Remaining: "+gameData.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));
         label1.setSize(500,40);
         label1.setLocation(20,title.getY()+title.getHeight()+5);
@@ -119,14 +122,13 @@ public class CardScreen extends BasicScreen {
 
         if (introAnimationStep == -1){
 
-            ExplainGameData data = game.gameData;
-            int promptId = data.getCardIndex();
+            int promptId = gameData.getCardIndex();
             if (promptId == -1 || promptId >= game.playerManager.getPlayerCount()){ return; }
 
-            String[] responses = data.getPromptResponses(promptId, "No Response");
-            int[] responders = data.getPromptResponders(promptId);
+            String[] responses = gameData.getPromptResponses(promptId, "No Response");
+            int[] responders = gameData.getPromptResponders(promptId);
 
-            promptLabel.setText( data.getPrompt(promptId) );
+            promptLabel.setText( gameData.getPrompt(promptId) );
             card1.setText(responses[0]);
             name1.setText(game.playerManager.getPlayers().get(responders[0]));
             card2.setText(responses[1]);
@@ -198,11 +200,10 @@ public class CardScreen extends BasicScreen {
     public void showResults(){
         if (animationTimer.isInterpolating()){ return; }
 
-        ExplainGameData data = game.gameData;
-        int promptId = data.getCardIndex();
+        int promptId = gameData.getCardIndex();
 
-        int votes1 = data.getVotes(promptId,0);
-        int votes2 = data.getVotes(promptId,1);
+        int votes1 = gameData.getVotes(promptId,0);
+        int votes2 = gameData.getVotes(promptId,1);
 
         if (resultsAnimationStep == -1){
             resultsAnimationStep++;
@@ -264,7 +265,7 @@ public class CardScreen extends BasicScreen {
 
         else if (game.gameStateManager.getPhase() == VOTE_PHASE){
             if (introAnimationStep != -1){ resetIntro(); }
-            label1.setText("Time Remaining: "+game.gameData.voteTimer.getTimeRemaining());
+            label1.setText("Time Remaining: "+gameData.voteTimer.getTimeRemaining());
         }
 
         else if (game.gameStateManager.getPhase() == VOTE_RESULTS_PHASE){

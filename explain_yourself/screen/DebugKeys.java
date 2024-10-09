@@ -4,14 +4,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import explain_yourself.ExplainGame;
+import library.webgame.WebGame;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
 public class DebugKeys extends KeyAdapter {
 
-    private ExplainGame game;
+    private WebGame game;
 
-    public DebugKeys(ExplainGame game){
+    public DebugKeys(WebGame game){
         this.game = game;
     }
 

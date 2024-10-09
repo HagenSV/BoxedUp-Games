@@ -27,7 +27,7 @@ public class ExplainGame {
 
         playerManager = new ExplainGamePM(gameData);
         gameStateManager = new ExplainGameSM(gameData);
-        serverViewManager = new ExplainGameVM(w,this);
+        serverViewManager = new ExplainGameVM(w,gameData);
 
         game = new WebGame(playerManager,gameStateManager,serverViewManager);
 

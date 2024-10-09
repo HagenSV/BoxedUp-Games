@@ -17,6 +17,7 @@ import static explain_yourself.ExplainGameConfigs.*;
 import library.graphics.DefaultLabel;
 import library.graphics.Window;
 import library.webgame.ServerViewManager;
+import library.webgame.WebGame;
 
 public class ExplainGameVM extends ServerViewManager {
 
@@ -27,15 +28,13 @@ public class ExplainGameVM extends ServerViewManager {
     public final Window window;
     private final JPanel panel;
     
-    private ExplainGame game;
-
     private BasicScreen currentScreen;
     private BasicScreen menuScreen;
     private BasicScreen scoresScreen;
     private BasicScreen cardScreen;
     private BasicScreen promptScreen;
 
-    public ExplainGameVM(Window w, ExplainGame game){
+    public ExplainGameVM(Window w, ExplainGameData gameData){
         this.window = w;
 
         panel = new JPanel();
@@ -47,12 +46,10 @@ public class ExplainGameVM extends ServerViewManager {
         window.setScene(panel);
         panel.requestFocus();
 
-        this.game = game;
-
-        menuScreen = new MenuScreen(this);
-        promptScreen = new PromptScreen(this);
-        cardScreen = new CardScreen(this);
-        scoresScreen = new ScoresScreen(this);
+        menuScreen = new MenuScreen(window,game,gameData);
+        promptScreen = new PromptScreen(window,game,gameData);
+        cardScreen = new CardScreen(window,game,gameData);
+        scoresScreen = new ScoresScreen(window,game,gameData);
 
         setScreen(menuScreen);
     }
@@ -94,13 +91,15 @@ public class ExplainGameVM extends ServerViewManager {
 
     public static class BasicScreen extends JPanel {
 
-        public final ExplainGameVM screenManager;
-        public final ExplainGame game;
+        public final Window window;
+        public final WebGame game;
+        public final ExplainGameData gameData;
         public final JLabel title;
 
-        public BasicScreen(ExplainGameVM sm){
-            this.screenManager = sm;
-            this.game = sm.game;
+        public BasicScreen(Window w, WebGame game, ExplainGameData gameData){
+            this.window = w;
+            this.game = game;
+            this.gameData = gameData;
             setBackground(BACKGROUND_COLOR);
             setLayout(null);
             title = new DefaultLabel("Explain Yourself!",JLabel.LEFT);

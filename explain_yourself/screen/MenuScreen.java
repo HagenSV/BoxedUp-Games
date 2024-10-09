@@ -10,12 +10,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM;
+import explain_yourself.ExplainGameVM.BasicScreen;
+
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.Server;
 import library.graphics.BlankButton;
 import library.graphics.DefaultLabel;
+import library.graphics.Window;
+import library.webgame.ServerViewManager;
+import library.webgame.WebGame;
 import main.MenuManager;
 
 public class MenuScreen extends BasicScreen {
@@ -34,8 +40,8 @@ public class MenuScreen extends BasicScreen {
     private boolean initialized;
     private boolean transition;
 
-    public MenuScreen(ExplainGameVM explainGameVM){
-        super(explainGameVM);
+    public MenuScreen(Window w, ServerViewManager svm, WebGame game, ExplainGameData gameData) {
+        super(w, svm, game, gameData);
         this.transition = false;
 
         label1Offset = new DynamicValue(0);
@@ -98,8 +104,8 @@ public class MenuScreen extends BasicScreen {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.game.endGame();
-                screenManager.window.setScene(MenuManager.getInstance());
+                game.endGame();
+                window.setScene(MenuManager.getInstance());
             }
         });
         add(exitButton);
