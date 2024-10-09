@@ -8,6 +8,10 @@ body {
     margin: 20px;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .header {
     background-color: var(--background-color);
     margin: 0;
@@ -23,4 +27,18 @@ body {
 .header p {
     width: 100%;
     margin-top: 5px;
+}
+
+.footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    position: fixed;
+    font-weight: bolder;
+}
+
+.footer h3 {
+    margin: 5px 0px;
 }

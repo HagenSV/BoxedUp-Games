@@ -92,10 +92,6 @@ Width:
     resize: none;
 }
 
-.center-text {
-    text-align: center;
-}
-
 .card {
     width: 70%;
     height: auto;
@@ -109,28 +105,17 @@ Width:
 }
 
 .footer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    margin: auto;
-    position: fixed;
-    font-weight: bolder;
     background-color: var(--primary-color);
-}
-
-.footer h3 {
-    margin: 5px 0px;
-}
-
-@media screen and (min-width: 800px) {
-    .card {
-        width: 40%;
-    }
 }
 
 button {
     border-width: 2px;
     border-style: outset;
     border-color: black;
+}
+
+@media screen and (min-width: 800px) {
+    .card {
+        width: 40%;
+    }
 }
