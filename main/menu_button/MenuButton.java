@@ -1,7 +1,8 @@
-package main;
+package main.menu_button;
 import javax.swing.JButton;
 
 import library.graphics.BlankButton;
+import main.MenuManager;
 
 import java.awt.Color;
 

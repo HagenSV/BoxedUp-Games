@@ -17,8 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import conspiracy_theory.ConspiracyGame;
 import explain_yourself.ExplainGame;
 import library.graphics.Window;
+import main.menu_button.ConspiracyGameBtn;
+import main.menu_button.ExplainGameBtn;
+import main.menu_button.MenuButton;
 
 public class MenuManager extends JPanel {
     private static MenuManager instance;
@@ -96,29 +100,11 @@ public class MenuManager extends JPanel {
         title2.setBounds(0,0,100,30);
         add(title2);
 
-        JButton explainButton = new MenuButton("Explain Yourself!");
-        explainButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new ExplainGame(window);
-                } catch (IOException e1) {
-                    window.setScene(MenuManager.this);
-
-                    Component errorMsg = new PopUpMessage(e1.getMessage());
-                    errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
-                    add(errorMsg);
-
-
-                    e1.printStackTrace();
-                }
-            }
-        });
+        JButton explainButton = new ExplainGameBtn(window);
         add(explainButton);
 
-        JButton gamebtn2 = new MenuButton("Game_2");
-        gamebtn2.addActionListener(new ComingSoonPopUp());
-        add(gamebtn2);
+        JButton conspiracyBtn = new ConspiracyGameBtn(window);
+        add(conspiracyBtn);
 
         JButton gamebtn3 = new MenuButton("Game_3");
         gamebtn3.addActionListener(new ComingSoonPopUp());
@@ -136,7 +122,7 @@ public class MenuManager extends JPanel {
         gamebtn6.addActionListener(new ComingSoonPopUp());
         add(gamebtn6);
 
-        buttons = new JButton[]{ explainButton, gamebtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
+        buttons = new JButton[]{ explainButton, conspiracyBtn, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
 
         for (JButton btn : buttons){
             btn.addMouseListener(new HoverListener());
