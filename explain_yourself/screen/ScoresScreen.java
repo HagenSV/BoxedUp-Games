@@ -1,15 +1,24 @@
 package explain_yourself.screen;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import explain_yourself.ExplainGame;
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM.BasicScreen;
 
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
+import library.graphics.BlankButton;
 import library.graphics.Window;
 import library.webgame.WebGame;
+import main.MenuManager;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 
 public class ScoresScreen extends BasicScreen {
 
@@ -20,12 +29,49 @@ public class ScoresScreen extends BasicScreen {
     private String[] players;
     private int[] scores;
 
+    private JButton menuBtn;
+    private JButton newGameBtn;
+
     private DynamicValue displayScores;
 
     public ScoresScreen(Window w, WebGame game, ExplainGameData gameData) {
         super(w, game, gameData);
 
         initialized = false;
+
+        menuBtn = new BlankButton("Main Menu");
+        menuBtn.setFont(FONT.deriveFont(20f));
+        menuBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        menuBtn.setSize(200,50);
+        menuBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        menuBtn.setLocation(getWidth()*3/4-menuBtn.getWidth()/2,getHeight()-menuBtn.getHeight()-10);
+        menuBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                window.setScene(MenuManager.getInstance());
+            }
+            
+        });
+        add(menuBtn);
+
+
+        newGameBtn = new BlankButton("New Game");
+        newGameBtn.setFont(FONT.deriveFont(20f));
+        newGameBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        newGameBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        newGameBtn.setSize(200,50);
+        newGameBtn.setLocation(getWidth()*1/4-newGameBtn.getWidth()/2,getHeight()-newGameBtn.getHeight()-10);
+        newGameBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //new ExplainGame(w);
+            }
+            
+        });
+        add(newGameBtn);
+
     }
 
 
@@ -74,6 +120,10 @@ public class ScoresScreen extends BasicScreen {
         if (!initialized){
             init();
         }
+
+        menuBtn.setLocation(getWidth()*3/4-menuBtn.getWidth()/2,getHeight()-menuBtn.getHeight()-10);
+        newGameBtn.setLocation(getWidth()*1/4-newGameBtn.getWidth()/2,getHeight()-newGameBtn.getHeight()-10);
+
 
         g.setFont(FONT.deriveFont(35f));
         g.setColor(Color.black);
