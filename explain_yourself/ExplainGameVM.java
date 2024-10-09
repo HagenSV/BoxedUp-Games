@@ -44,7 +44,6 @@ public class ExplainGameVM extends ServerViewManager {
         panel.setLayout(new BorderLayout());
         panel.setBackground(BACKGROUND_COLOR);
         panel.setFocusable(true);
-        panel.addKeyListener(new DebugKeys(game));
         window.setScene(panel);
         panel.requestFocus();
 
@@ -57,6 +56,10 @@ public class ExplainGameVM extends ServerViewManager {
         promptScreen = new PromptScreen(window,game,gameData);
         cardScreen = new CardScreen(window,game,gameData);
         scoresScreen = new ScoresScreen(window,game,gameData);
+
+        if (DEBUG_MODE){
+            panel.addKeyListener(new DebugKeys(game));
+        }
 
         setScreen(menuScreen);
     }
