@@ -13,8 +13,8 @@ public class ExplainGamePM extends PlayerManager {
 
     private final ExplainGameData gameData;
 
-    public ExplainGamePM(int minPlayers, int maxPlayers, ExplainGameData gameData){
-       super(minPlayers,maxPlayers);
+    public ExplainGamePM(ExplainGameData gameData){
+       super(MIN_PLAYERS,MAX_PLAYERS);
        this.gameData = gameData;
     }
 
