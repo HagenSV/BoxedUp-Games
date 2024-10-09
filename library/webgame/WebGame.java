@@ -31,6 +31,10 @@ public class WebGame {
         gameStateManager.game = this;
         serverViewManager.game = this;
 
+        playerManager.init();
+        gameStateManager.init();
+        serverViewManager.init();
+
         gameOver = false;
         gameServer = new Server();
     }

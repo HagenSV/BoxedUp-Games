@@ -6,6 +6,8 @@ public abstract class ServerViewManager {
 
     public ServerViewManager(){}
 
+    public void init(){}
+
     /**
      * Called whenever the game phase changes
      * @param screenId the id of the new phase

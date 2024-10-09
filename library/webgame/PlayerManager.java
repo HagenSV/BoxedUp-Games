@@ -28,6 +28,8 @@ public abstract class PlayerManager {
         playerPhase = new ArrayList<>(MAX_PLAYERS);
     }
 
+    public void init(){}
+
     public abstract void sendScreen(HttpExchange exchange, int playerId) throws IOException;
 
     /**

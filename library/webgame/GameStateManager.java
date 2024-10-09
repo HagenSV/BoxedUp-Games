@@ -15,6 +15,8 @@ public abstract class GameStateManager {
         this.gamePhase = phase;
     }
 
+    public void init(){}
+
     /**
      * @return true if the game is in a state where players can join
      */
