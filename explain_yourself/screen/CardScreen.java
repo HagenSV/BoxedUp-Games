@@ -10,12 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
 import explain_yourself.ExplainGameData;
-import explain_yourself.ExplainGameVM;
 import explain_yourself.ExplainGameVM.BasicScreen;
 import library.DynamicValue;
 import library.graphics.DefaultLabel;
 import library.graphics.Window;
-import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
 
 import static explain_yourself.ExplainGameVM.*;
@@ -48,8 +46,8 @@ public class CardScreen extends BasicScreen {
     private DynamicValue revealCard1;
     private DynamicValue revealCard2;
 
-    public CardScreen(Window w, ServerViewManager svm, WebGame game, ExplainGameData gameData) {
-        super(w, svm, game, gameData);
+    public CardScreen(Window w, WebGame game, ExplainGameData gameData) {
+        super(w, game, gameData);
         
         label1 = new DefaultLabel("Time Remaining: "+gameData.voteTimer.getTimeRemaining());
         label1.setFont(FONT.deriveFont(35f));

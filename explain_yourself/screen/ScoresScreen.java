@@ -4,13 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import explain_yourself.ExplainGameData;
-import explain_yourself.ExplainGameVM;
 import explain_yourself.ExplainGameVM.BasicScreen;
 
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.graphics.Window;
-import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
 
 public class ScoresScreen extends BasicScreen {

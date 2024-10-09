@@ -3,7 +3,6 @@ package explain_yourself.screen;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import explain_yourself.ExplainGame;
 import library.webgame.WebGame;
 
 import static explain_yourself.ExplainGameConfigs.*;

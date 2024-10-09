@@ -7,11 +7,9 @@ import java.util.List;
 import javax.swing.JLabel;
 
 import explain_yourself.ExplainGameData;
-import explain_yourself.ExplainGameVM;
 import explain_yourself.ExplainGameVM.BasicScreen;
 import library.graphics.DefaultLabel;
 import library.graphics.Window;
-import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
 
 import static explain_yourself.ExplainGameVM.*;

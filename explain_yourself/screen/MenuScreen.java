@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import explain_yourself.ExplainGameData;
-import explain_yourself.ExplainGameVM;
 import explain_yourself.ExplainGameVM.BasicScreen;
 
 import static explain_yourself.ExplainGameVM.*;
@@ -20,7 +19,6 @@ import library.Server;
 import library.graphics.BlankButton;
 import library.graphics.DefaultLabel;
 import library.graphics.Window;
-import library.webgame.ServerViewManager;
 import library.webgame.WebGame;
 import main.MenuManager;
 
@@ -40,8 +38,8 @@ public class MenuScreen extends BasicScreen {
     private boolean initialized;
     private boolean transition;
 
-    public MenuScreen(Window w, ServerViewManager svm, WebGame game, ExplainGameData gameData) {
-        super(w, svm, game, gameData);
+    public MenuScreen(Window w, WebGame game, ExplainGameData gameData) {
+        super(w, game, gameData);
         this.transition = false;
 
         label1Offset = new DynamicValue(0);
