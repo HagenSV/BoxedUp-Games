@@ -11,10 +11,11 @@ import main.PopUpMessage;
 
 public class ExplainGameBtn extends MenuButton {
 
-    private Window window;
+    private final Window window;
 
     public ExplainGameBtn(Window w) {
         super("Explain Yourself");
+        this.window = w;
         addActionListener(new ClickListener());
     }
 
