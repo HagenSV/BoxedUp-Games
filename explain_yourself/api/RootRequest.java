@@ -19,7 +19,7 @@ public class RootRequest extends APIRequest {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if (validate(exchange) != -1){
-            send303Redirect(exchange, "/game1");
+            send303Redirect(exchange, GameRequest.PATH);
         }
 
         File toSend = new File("assets/common/index.html");
