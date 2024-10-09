@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import library.graphics.Window;
-import main.menu_button.ConspiracyGameBtn;
 import main.menu_button.ExplainGameBtn;
 import main.menu_button.MenuButton;
 
@@ -100,8 +99,8 @@ public class MenuManager extends JPanel {
         JButton explainButton = new ExplainGameBtn(window);
         add(explainButton);
 
-        JButton conspiracyBtn = new ConspiracyGameBtn(window);
-        add(conspiracyBtn);
+        JButton gameBtn2 = new MenuButton("Game_2");
+        add(gameBtn2);
 
         JButton gamebtn3 = new MenuButton("Game_3");
         gamebtn3.addActionListener(new ComingSoonPopUp());
@@ -119,7 +118,7 @@ public class MenuManager extends JPanel {
         gamebtn6.addActionListener(new ComingSoonPopUp());
         add(gamebtn6);
 
-        buttons = new JButton[]{ explainButton, conspiracyBtn, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
+        buttons = new JButton[]{ explainButton, gameBtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
 
         for (JButton btn : buttons){
             btn.addMouseListener(new HoverListener());
