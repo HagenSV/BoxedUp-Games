@@ -25,8 +25,10 @@ public class ExplainGameVM extends ServerViewManager {
     public static final Color TEXT_COLOR = Color.BLACK;
     public static final Font FONT = new Font("Cooper Black",Font.PLAIN,1);
 
-    public final Window window;
+    private final Window window;
     private final JPanel panel;
+
+    private final ExplainGameData gameData;
     
     private BasicScreen currentScreen;
     private BasicScreen menuScreen;
@@ -36,9 +38,9 @@ public class ExplainGameVM extends ServerViewManager {
 
     public ExplainGameVM(Window w, ExplainGameData gameData){
         this.window = w;
+        this.gameData = gameData;
 
         panel = new JPanel();
-
         panel.setLayout(new BorderLayout());
         panel.setBackground(BACKGROUND_COLOR);
         panel.setFocusable(true);
@@ -46,6 +48,11 @@ public class ExplainGameVM extends ServerViewManager {
         window.setScene(panel);
         panel.requestFocus();
 
+    }
+
+
+    @Override
+    public void init(){
         menuScreen = new MenuScreen(window,game,gameData);
         promptScreen = new PromptScreen(window,game,gameData);
         cardScreen = new CardScreen(window,game,gameData);
