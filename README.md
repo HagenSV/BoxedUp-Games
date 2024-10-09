@@ -4,6 +4,6 @@ Despite this limitation, the game is will still be able to thrive with its targe
 
 # Games
 ## Explain Yourself
-Go head to head against your friends to see which of you can come up for the best explaination for the situation you're in. 
+Go head to head against your friends to see which of you can provide the best explanation for the situation you're in. 
 
-Each player will be given two prompts (and each prompt will ge given to two players) stating the situation they are currently in, they must answer the prompt explaining how they got there. Once everyone has answered their prompt, or the time has run out, players will then vote on their favorite response to each situation.
+Each player will be given two prompts (and each prompt will be given to two players) stating the situation they are currently in, they must answer the prompt explaining how they got there. Once everyone has answered their prompt, or the time has run out, players will then vote on their favorite response to each situation.
