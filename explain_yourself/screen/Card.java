@@ -12,6 +12,7 @@ public class Card extends CenteredTextPane {
     public Card() {
 
         setEditable(false);
+        setFocusable(false);
         setBackground(BACKGROUND_COLOR);
         setBorder(BorderFactory.createLineBorder(Color.black));
         setFont(getFont().deriveFont(18f));
