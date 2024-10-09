@@ -86,10 +86,6 @@ Width:
 
 */
 
-#contents {
-    margin: 20px;
-}
-
 #response {
     overflow-wrap: normal;
     word-wrap: normal;
@@ -101,7 +97,7 @@ Width:
 }
 
 .card {
-    width: 40%;
+    width: 70%;
     height: auto;
     aspect-ratio: 16 / 9;
     margin: 3%;
@@ -110,23 +106,6 @@ Width:
 
 .card.selected {
     background-color: var(--secondary-color);
-}
-
-.header {
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 5px 0px
-}
-
-.header h2 {
-    letter-spacing: 2px;
-    font-size: 50px;
-    margin: 5px 0px
-}
-
-.header p {
-    width: 100%;
-    margin-top: 5px;
 }
 
 .footer {
@@ -144,9 +123,9 @@ Width:
     margin: 5px 0px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (min-width: 800px) {
     .card {
-        width: 70%;
+        width: 40%;
     }
 }
 
