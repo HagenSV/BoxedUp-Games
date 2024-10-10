@@ -10,7 +10,6 @@ import explain_yourself.ExplainGame;
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM.BasicScreen;
 
-import static explain_yourself.ExplainGameConfigs.JOIN_PHASE;
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
 import library.OutputLog;
