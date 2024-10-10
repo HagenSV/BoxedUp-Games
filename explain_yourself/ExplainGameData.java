@@ -11,9 +11,9 @@ import library.Timer;
 import static explain_yourself.ExplainGameConfigs.*;
 
 public class ExplainGameData {
-    private static final File PROMPT_FILE = new File("assets/explain_yourself/data/prompts.txt");
-    private static final File COUNTRIES_FILE = new File("assets/explain_yourself/data/countries.txt");
-    private static final File PLACES_FILE = new File("assets/explain_yourself/data/places.txt");
+    private static final File PROMPT_FILE = new File(DIRECTORY,"data\\prompts.txt");
+    private static final File COUNTRIES_FILE = new File(DIRECTORY,"data\\countries.txt");
+    private static final File PLACES_FILE = new File(DIRECTORY,"data\\places.txt");
 
     private static final int PROMPTS_PER_PLAYER = 2;
 
