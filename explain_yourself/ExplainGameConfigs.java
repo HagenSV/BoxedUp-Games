@@ -3,6 +3,8 @@ package explain_yourself;
 import java.io.File;
 import java.net.URISyntaxException;
 
+import library.OutputLog;
+
 public class ExplainGameConfigs {
     
     public static final boolean DEBUG_MODE = false;
@@ -35,6 +37,7 @@ public class ExplainGameConfigs {
             File dir = new File(Thread.currentThread().getContextClassLoader().getResource(path).toURI());
             return dir;
         } catch (URISyntaxException e){
+            OutputLog.getInstance().log(e.getMessage());
             return null;
         }
     }
