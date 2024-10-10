@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import explain_yourself.ExplainGame;
+import library.OutputLog;
 import library.graphics.Window;
 import main.MenuManager;
 import main.PopUpMessage;
@@ -30,10 +31,9 @@ public class ExplainGameBtn extends MenuButton {
 
                 PopUpMessage errorMsg = new PopUpMessage(e1.getMessage());
                 errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
-                add(errorMsg);
+                MenuManager.getInstance().add(errorMsg);
 
-
-                e1.printStackTrace();
+                OutputLog.getInstance().log(e1.getMessage());
             }
         }
     }
