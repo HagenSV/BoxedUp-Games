@@ -5,6 +5,7 @@ import static explain_yourself.ExplainGameConfigs.VOTE_PHASE;
 import static explain_yourself.ExplainGameConfigs.VOTE_RESULTS_PHASE;
 
 import java.awt.Graphics;
+import java.io.File;
 
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -12,6 +13,8 @@ import javax.swing.JTextPane;
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM.BasicScreen;
 import library.DynamicValue;
+import library.OutputLog;
+import library.Sound;
 import library.graphics.DefaultLabel;
 import library.graphics.Window;
 import library.webgame.WebGame;
@@ -133,8 +136,23 @@ public class CardScreen extends BasicScreen {
             name2.setText(game.playerManager.getPlayers().get(responders[1]));
 
             introAnimationStep = 0;
-            animationTimer.interpolate(0, 1000);
+
+            if (gameData.getCardIndex() == 0 ){
+
+                try {
+                    Sound transitionAudio = new Sound(new File("assets/explain_yourself/audio/voting_transition2.wav"));
+
+                    animationTimer.interpolate(0, transitionAudio.getDuration()+1000);
+                    transitionAudio.play();
+
+                } catch (Exception e){
+                    OutputLog.getInstance().log(e.getMessage());
+                }
+
+            }
+
             promptOffset.setValue(promptLabel.getHeight()/2+card1.getHeight()/2+50);
+            promptLabel.setVisible(false);
             card1.setVisible(false);
             card2.setVisible(false);
             name1.setVisible(false);
@@ -147,40 +165,46 @@ public class CardScreen extends BasicScreen {
         }
 
         else if (introAnimationStep == 0){
+            promptLabel.setVisible(true);
+            introAnimationStep++;
+            animationTimer.interpolate(0, 1000);
+        }
+
+        else if (introAnimationStep == 1){
             introAnimationStep++;
             animationTimer.interpolate(0, 1000);
             promptOffset.interpolate(0, 1000);
         }
 
-        else if (introAnimationStep == 1){
+        else if (introAnimationStep == 2){
             introAnimationStep++;
             animationTimer.interpolate(0,1000);
             card1.setVisible(true);
         }
 
-        else if (introAnimationStep == 2){
-            introAnimationStep++;
-            animationTimer.interpolate(0, 1000);
-        }
-
         else if (introAnimationStep == 3){
             introAnimationStep++;
             animationTimer.interpolate(0, 1000);
-            card2.setVisible(true);
         }
 
         else if (introAnimationStep == 4){
             introAnimationStep++;
             animationTimer.interpolate(0, 1000);
-            label2.setVisible(true);
+            card2.setVisible(true);
         }
 
         else if (introAnimationStep == 5){
             introAnimationStep++;
             animationTimer.interpolate(0, 1000);
+            label2.setVisible(true);
         }
 
         else if (introAnimationStep == 6){
+            introAnimationStep++;
+            animationTimer.interpolate(0, 1000);
+        }
+
+        else if (introAnimationStep == 7){
             label1.setVisible(true);
             resetIntro();
             game.gameStateManager.setPhase(VOTE_PHASE);
