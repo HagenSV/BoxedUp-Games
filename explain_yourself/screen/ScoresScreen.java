@@ -10,12 +10,15 @@ import explain_yourself.ExplainGame;
 import explain_yourself.ExplainGameData;
 import explain_yourself.ExplainGameVM.BasicScreen;
 
+import static explain_yourself.ExplainGameConfigs.JOIN_PHASE;
 import static explain_yourself.ExplainGameVM.*;
 import library.DynamicValue;
+import library.OutputLog;
 import library.graphics.BlankButton;
 import library.graphics.Window;
 import library.webgame.WebGame;
 import main.MenuManager;
+import main.PopUpMessage;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -49,6 +52,7 @@ public class ScoresScreen extends BasicScreen {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                game.endGame();
                 window.setScene(MenuManager.getInstance());
             }
             
@@ -66,7 +70,18 @@ public class ScoresScreen extends BasicScreen {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new ExplainGame(w);
+                try {
+                    game.endGame();
+                    new ExplainGame(window);
+                } catch (Exception e1){
+                    window.setScene(MenuManager.getInstance());
+
+                    PopUpMessage errorMsg = new PopUpMessage(e1.getMessage());
+                    errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
+                    MenuManager.getInstance().add(errorMsg);
+
+                    OutputLog.getInstance().log(e1.getMessage());
+                }
             }
             
         });
