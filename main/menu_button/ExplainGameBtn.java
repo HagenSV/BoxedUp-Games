@@ -27,11 +27,13 @@ public class ExplainGameBtn extends MenuButton {
             try {
                 new ExplainGame(window);
             } catch (IOException e1) {
-                window.setScene(MenuManager.getInstance());
+                MenuManager panel = MenuManager.getInstance();
+
+                window.setScene(panel);
 
                 PopUpMessage errorMsg = new PopUpMessage(e1.getMessage());
-                errorMsg.setLocation((getWidth()-errorMsg.getWidth())/2, (getHeight()-errorMsg.getHeight())/2);
-                MenuManager.getInstance().add(errorMsg);
+                errorMsg.setLocation((panel.getWidth()-errorMsg.getWidth())/2, (panel.getHeight()-errorMsg.getHeight())/2);
+                panel.add(errorMsg);
 
                 OutputLog.getInstance().log(e1.getMessage());
             }
