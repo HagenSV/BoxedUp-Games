@@ -33,7 +33,7 @@ public class ExplainGame {
 
         new RootRequest(game);
         new CommonRequest(game);
-        new StaticRequest(game,DIRECTORY);
+        new StaticRequest(game,CLIENT_DIRECTORY);
         new PlayerListRequest(game);
         new ViewRequest(game);
         new NameRequest(game);

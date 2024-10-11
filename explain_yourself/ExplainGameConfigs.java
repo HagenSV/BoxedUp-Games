@@ -15,14 +15,15 @@ public class ExplainGameConfigs {
     public static final int MIN_PLAYERS = 5;
     public static final int MAX_PLAYERS = 12;
     
-    public static final File DIRECTORY = getFile("assets\\common\\explain_yourself");
+    public static final File DIRECTORY = new File("assets/explain_yourself");
+    public static final File CLIENT_DIRECTORY = new File(DIRECTORY,"client");
 
-    public static final File GAME_PAGE = new File(DIRECTORY,"client\\join_game.html");
-    public static final File GAME_CLOSED = new File(DIRECTORY,"client\\game_closed.html");
-    public static final File WAIT_SCREEN = new File(DIRECTORY,"client\\wait_screen.html");
-    public static final File RESPONSE_FORM = new File(DIRECTORY, "client\\form.html");
-    public static final File CARD_CHOOSER = new File(DIRECTORY,"client\\cards.html");
-    public static final File GAME_OVER_SCREEN = new File(DIRECTORY,"client\\game_over.html");
+    public static final File GAME_PAGE = new File(CLIENT_DIRECTORY,"join_game.html");
+    public static final File GAME_CLOSED = new File(CLIENT_DIRECTORY,"game_closed.html");
+    public static final File WAIT_SCREEN = new File(CLIENT_DIRECTORY,"wait_screen.html");
+    public static final File RESPONSE_FORM = new File(CLIENT_DIRECTORY, "form.html");
+    public static final File CARD_CHOOSER = new File(CLIENT_DIRECTORY,"cards.html");
+    public static final File GAME_OVER_SCREEN = new File(CLIENT_DIRECTORY,"game_over.html");
 
     public static final int JOIN_PHASE = 0;
     public static final int PROMPT_PHASE = 1;
