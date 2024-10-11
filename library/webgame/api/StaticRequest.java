@@ -1,22 +1,22 @@
 package library.webgame.api;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import library.FileSystem;
 import library.webgame.WebGame;
 
 public class StaticRequest extends APIRequest {
 
     public static final String PATH = "/static/";
 
-    private final File DIRECTORY;
+    private final String DIRECTORY;
 
-    public StaticRequest(WebGame game, File dir) {
+    public StaticRequest(WebGame game, String dirPath) {
         super(PATH, game);
-        if (!dir.isDirectory()){ throw new IllegalArgumentException("dir must be a directory!"); }
-        DIRECTORY = dir;
+        DIRECTORY = dirPath;
 
     }
 
@@ -26,9 +26,10 @@ public class StaticRequest extends APIRequest {
 
         if (path.isEmpty()){ path = "index.html"; }
 
-        File toSend = new File(DIRECTORY,path);
 
-        if (!toSend.exists()){
+        URL toSend = FileSystem.getFile(DIRECTORY, path);
+
+        if (toSend == null){
             send404NotFound(exchange);
             return;
         }

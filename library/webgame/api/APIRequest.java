@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.net.URL;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -138,6 +139,19 @@ public abstract class APIRequest implements HttpHandler {
         OutputStream out = exchange.getResponseBody();
 
         Files.copy( f.toPath(), out );
+        out.close();   
+    }
+
+    public static void sendResponse( HttpExchange exchange, int rCode, URL fileUrl ) throws IOException {
+        sendResponse(exchange, rCode, fileUrl.openStream() );
+    }
+
+    public static void sendResponse( HttpExchange exchange, int rCode, InputStream in ) throws IOException {
+        exchange.sendResponseHeaders( rCode, in.available() );
+
+        OutputStream out = exchange.getResponseBody();
+
+        in.transferTo(out);
         out.close();   
     }
 

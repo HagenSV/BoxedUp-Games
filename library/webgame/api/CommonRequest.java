@@ -1,16 +1,17 @@
 package library.webgame.api;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import library.FileSystem;
 import library.webgame.WebGame;
 
 public class CommonRequest extends APIRequest {
 
     public static final String PATH = "/common/";
-    public static final File DIRECTORY = new File("assets/common");
+    public static final String DIRECTORY = "assets/common";
 
     public CommonRequest(WebGame game) {
         super(PATH, game);
@@ -22,14 +23,15 @@ public class CommonRequest extends APIRequest {
 
         if (path.isEmpty()){ path = "index.html"; }
 
-        File toSend = new File(DIRECTORY,path);
+        URL toSend = FileSystem.getFile(DIRECTORY, path);
 
-        if (!toSend.exists()){
+        if (toSend == null){
             send404NotFound(exchange);
             return;
         }
 
         sendResponse(exchange, 200, toSend);
+
     }
     
 }

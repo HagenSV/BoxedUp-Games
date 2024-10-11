@@ -1,19 +1,20 @@
 package explain_yourself;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import library.FileSystem;
 import library.Timer;
 
 import static explain_yourself.ExplainGameConfigs.*;
 
 public class ExplainGameData {
-    private static final File PROMPT_FILE = new File(DIRECTORY,"data/prompts.txt");
-    private static final File COUNTRIES_FILE = new File(DIRECTORY,"data/countries.txt");
-    private static final File PLACES_FILE = new File(DIRECTORY,"data/places.txt");
+    private static final URL PROMPT_FILE = FileSystem.getFile(DIR_STRING,"data/prompts.txt");
+    private static final URL COUNTRIES_FILE = FileSystem.getFile(DIR_STRING,"data/countries.txt");
+    private static final URL PLACES_FILE = FileSystem.getFile(DIR_STRING,"data/places.txt");
 
     private static final int PROMPTS_PER_PLAYER = 2;
 
@@ -272,9 +273,9 @@ public class ExplainGameData {
      * @param f the file to read
      * @return an arraylist containing the lines of strings in the file, or null if the file could not be found
      */
-    public static List<String> readFile(File f){
+    public static List<String> readFile(URL f){
 
-        try ( Scanner file = new Scanner( f ) ) {
+        try ( Scanner file = new Scanner( f.openStream() ) ) {
             
             List<String> lines = new ArrayList<>();
             
@@ -287,7 +288,7 @@ public class ExplainGameData {
 
             return lines;
             
-        } catch (FileNotFoundException ignored){
+        } catch (IOException ignored){
             return null;
         }
     }

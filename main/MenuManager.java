@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import library.FileSystem;
 import library.graphics.Window;
 import main.menu_button.ExplainGameBtn;
 import main.menu_button.MenuButton;
@@ -81,7 +82,7 @@ public class MenuManager extends JPanel {
         });
 
         window = new Window("BoxedUp Games");
-        window.setIconImage(new ImageIcon("assets/common/logo.png").getImage());
+        window.setIconImage(new ImageIcon(FileSystem.getFile("assets/common/logo.png")).getImage());
         window.setScene(this);
         window.setVisible(true);
 

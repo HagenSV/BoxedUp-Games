@@ -2,9 +2,11 @@ package explain_yourself.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import library.FileSystem;
 import library.webgame.WebGame;
 import library.webgame.api.APIRequest;
 
@@ -22,9 +24,9 @@ public class RootRequest extends APIRequest {
             send303Redirect(exchange, GameRequest.PATH);
         }
 
-        File toSend = new File("assets/common/index.html");
+        URL toSend = FileSystem.getFile("assets/common/index.html");
 
-        if (!toSend.exists()){
+        if (toSend == null){
             send404NotFound(exchange);
             return;
         }
