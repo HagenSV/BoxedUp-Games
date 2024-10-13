@@ -36,6 +36,8 @@ public class MenuManager extends JPanel {
 
     private Window window;
 
+    private boolean initialized = false;
+
     private MenuManager(){
 
         setBackground(BACKGROUND_COLOR);
@@ -125,6 +127,8 @@ public class MenuManager extends JPanel {
             btn.addMouseListener(new HoverListener());
         }
 
+        initialized = true;
+
     }
 
     public static MenuManager getInstance(){
@@ -153,6 +157,8 @@ public class MenuManager extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        if (!initialized){ return; }
 
         title.setLocation(getWidth()-title.getWidth()-50, 20);
         title2.setLocation(getWidth()-title.getWidth()/2-20, 20+title.getHeight());
