@@ -102,8 +102,9 @@ public class MenuManager extends JPanel {
         JButton explainButton = new ExplainGameBtn(window);
         add(explainButton);
 
-        JButton gameBtn2 = new MenuButton("Game_2");
-        add(gameBtn2);
+        JButton gamebtn2 = new MenuButton("Game_2");
+        gamebtn2.addActionListener(new ComingSoonPopUp());
+        add(gamebtn2);
 
         JButton gamebtn3 = new MenuButton("Game_3");
         gamebtn3.addActionListener(new ComingSoonPopUp());
@@ -121,7 +122,7 @@ public class MenuManager extends JPanel {
         gamebtn6.addActionListener(new ComingSoonPopUp());
         add(gamebtn6);
 
-        buttons = new JButton[]{ explainButton, gameBtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
+        buttons = new JButton[]{ explainButton, gamebtn2, gamebtn3, gamebtn4, gamebtn5, gamebtn6 };
 
         for (JButton btn : buttons){
             btn.addMouseListener(new HoverListener());
