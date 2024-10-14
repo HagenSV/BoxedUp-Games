@@ -15,6 +15,8 @@ public class ExplainGameData {
     private static final URL PROMPT_FILE = FileSystem.getFile(DIR_STRING,"data/prompts.txt");
     private static final URL COUNTRIES_FILE = FileSystem.getFile(DIR_STRING,"data/countries.txt");
     private static final URL PLACES_FILE = FileSystem.getFile(DIR_STRING,"data/places.txt");
+    private static final URL CELEBTITIES_FILE = FileSystem.getFile(DIR_STRING,"data/celebrities.txt");
+
 
     private static final int PROMPTS_PER_PLAYER = 2;
 
@@ -208,12 +210,14 @@ public class ExplainGameData {
         List<String> promptPool = readFile(PROMPT_FILE);
         List<String> countryPool = readFile(COUNTRIES_FILE);
         List<String> placesPool = readFile(PLACES_FILE);
+        List<String> celebrityPool = readFile(CELEBTITIES_FILE);
         List<String> playerPool = game.playerManager.getPlayers();
 
         for (int i = 0; i < PLAYER_COUNT ; i++ ){
             if ( promptPool.isEmpty() ) { promptPool = readFile(PROMPT_FILE); }
             if ( countryPool.isEmpty()) { countryPool = readFile(COUNTRIES_FILE); }
             if ( placesPool.isEmpty() ) { placesPool = readFile(PLACES_FILE); }
+            if ( celebrityPool.isEmpty() ) { readFile(CELEBTITIES_FILE); }
             if ( placesPool.isEmpty() ) { playerPool = game.playerManager.getPlayers(); }
 
             String prompt = removeRandom(promptPool);
@@ -222,6 +226,7 @@ public class ExplainGameData {
 
             prompt = prompt.replaceAll( "\\{country}", removeRandom(countryPool) );
             prompt = prompt.replaceAll( "\\{place}", removeRandom(placesPool) );
+            prompt = prompt.replaceAll( "\\{celebrity}", removeRandom(celebrityPool) );
             prompt = prompt.replaceAll( "\\{player}", removeRandom(playerPool) );
 
 
