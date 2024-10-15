@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="boxed-up.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/boxed_up_main_jar</output-path>
+    <root id="archive" name="boxed-up.main.jar">
+      <element id="module-output" name="boxed-up.main" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
+    </root>
+  </artifact>
+</component>
